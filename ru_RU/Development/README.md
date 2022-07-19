@@ -1,19 +1,20 @@
-# LLSE - Overview of LLSE Plugin Development
+# LLSE - Обзор разработки плагинов LLSE 
 
-## ⛳ Start
+## ⛳ Начало
 
-`LiteLoader ScriptEngine` hereinafter referred to as **LLSE** is an official server for Bedrock Edition  `Bedrock Dedicated Server` hereinafter referred to as **BDS** plugin framework, providing powerful cross-language script plug-in support and stable development API support.  
+`LiteLoader ScriptEngine` именуемый в дальнейшем **LLSE** является официальным сервером для Bedrock Edition  `Bedrock Dedicated Server` именуемый в дальнейшем **BDS** инфраструктурой плагинов, обеспечивающей мощную поддержку подключаемых модулей сценариев на разных языках и стабильную разработку. Поддержка API.
 
-> Welcome to LLSE's plug-in development!
+> Доброе пожаловать в разработку плагинов на LLSE!
 
-From here, you will gradually become familiar with the basic elements and processes of LLSE plug-in development. 
+Здесь вы постепенно познакомитесь с основными элементами и процессами разработки подключаемых модулей LLSE.
 
-Before engaging with development, you need to have a systematic understanding of LLSE. The documentation here, first of all, will help you establish a general knowledge framework. 
-Familiarize yourself with them first, this will be a very important part of your learning development process. 
+Прежде чем приступить к разработке, вам необходимо получить базовое представление о LLSE. Документация поможет вам это сделать.
+
+Сначала ознакомьтесь с ней, это важная часть обучения процесса разработки. 
 
 <br>
 
-## 💊 Data Types
+## 💊 Типы переменных
 
 As we all know, the type system is usually a more critical part of a design framework. 
 So, first, you need to be familiar with several data types that you will use frequently when working with API documentation. 
@@ -21,39 +22,39 @@ The nouns of these data types appear frequently in the development documentation
 
 ### Generic Data Type Conventions
 
-Although scripting languages ​​are usually weakly typed, there is no need to pay attention to specific data types, but since LLSE supports a variety of different scripting languages, in order to facilitate the docking of the API, some general data types and the mapping relationship to the corresponding scripting language types are defined below.
+Хотя скриптовые языки обычно слабо типизированы, нет необходимости обращать внимание на конкретные типы данных, но поскольку LLSE поддерживает множество различных скриптовых языков, для облегчения стыковки API, некоторых общих типов данных и отображения отношения к соответствующим типам языка сценариев определены ниже.
 
-| Engine Data Type | JS Data Type        | Lua Data Type | Data Type Description           |
+| Engine переменные| JS переменные     | Lua переменные | Описание переменных         |
 | --------------- | ------------------ | ------------ | ---------------------- |
-| `Null`          | `null` `undefined` | `nil`        | Empty, undefined, does not exist, etc. |
-| `Integer`       | `Number`           | `number`     | Integer                |
-| `Float`         | `Number`           | `number`     | Float (Decimal, Real)   |
-| `String`        | `String`           | `string`     | String                 |
-| `Boolean`       | `Boolean`          | `boolean`    | Boolean                |
-| `Function`      | `Function`         | `function`   | Function (Method)      |
-| `Array`         | `Array`            | `table`      | Array (List)           |
-| `Object`        | `Object`           | `table`      | Objects (Maps, Dictionaries, Tables)  |
-| `ByteBuffer`    | `ArrayBuffer`      | `table`      | Byte Array             |
+| `Null`          | `null` `undefined` | `nil`        | Пусто, не найден, дырка от бублика и т.д. |
+| `Integer`       | `Number`           | `number`     | Число                |
+| `Float`         | `Number`           | `number`     | Плавающие число(с точкой)   |
+| `String`        | `String`           | `string`     | Строка                 |
+| `Boolean`       | `Boolean`          | `boolean`    | Булева пременная (true/false)                |
+| `Function`      | `Function`         | `function`   | Фукнция (Метод)      |
+| `Array`         | `Array`            | `table`      | Массив (Лист)           |
+| `Object`        | `Object`           | `table`      | Обьекты (Карты, Словари, Таблицы)  |
+| `ByteBuffer`    | `ArrayBuffer`      | `table`      | Битовый массив           |
 
-In addition to the above standard types, there are also some engine-defined object types. 
+В дополнение к выше описанным типам данных существуют и те обьекты, которые определяются внутри LLSE. 
 
-- `IntPos` - Integer coordinate object (see the base game interface for details)
-- `FloatPos` - Floating point coordinate object (see the base game interface for details)
-- `Player` - Player object (see Player for details)
-- `Entity` - Entity objects (see Entity for details) 
-- `Block` - Block objects (see Blocks for details)
-- `BlockEntity` - Block entity object (see Block entity for details)
-- `Item` - Inventory item object (see Items for details)
-- `Device` - Player equipment information object (see player for details)
-- `Container` - container object (see container for details)
-- `Objective` - Scored item object (see Scoreboard for details)
-- `NBT` - NBT Tag object (see NBT for details)
-- `SimpleForm` - Normal form objects (see Form Builder for details)
-- `CustomForm` - Custom form objects (see Form Builder for details)
-- `Conf` - Configuration file object (see configuration file for details)
-- `DB` - Database objects (see Database for details)
-- `File` - File object (see file reading and writing for details)
-- `WSClient` - WebSocket client object (see Network for details)
+- `IntPos` - Обьект целочисленных координат 
+- `FloatPos` - Обьект "плавающих" координат 
+- `Player` - Обьект игрока 
+- `Entity` - Обьект сущности
+- `Block` - Обьект блока
+- `BlockEntity` - Обьект блока-сущности
+- `Item` - Обьект предмета в инвентаре 
+- `Device` - Player equipment information object
+- `Container` - container object
+- `Objective` - Scored item object 
+- `NBT` - NBT Tag object 
+- `SimpleForm` - Normal form objects 
+- `CustomForm` - Custom form objects 
+- `Conf` - Configuration file object 
+- `DB` - Database objects 
+- `File` - File object 
+- `WSClient` - WebSocket client object 
 - `Enum` - Enumeration type, usually stored in some type, providing some limited range of options.
 
 <br>
