@@ -5,6 +5,8 @@ heroText:
 tagline:
 ---
 
+<!-- translated -->
+
 <div class="content">
     <div class="row">
         <div class="col-sm-3">

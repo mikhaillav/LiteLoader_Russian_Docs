@@ -4,6 +4,8 @@ heroText:
 tagline: 
 ---
 
+<!-- translated -->
+
 <main aria-labelledby="main-title">
   <header class="hero">
     <img src="/assets/LL-Logo.png" alt="hero"> 
