@@ -1,19 +1,19 @@
-# Installation and usage
+# Установка и использование
 
-## 💻 Install
+## 💻 Установка
 
-### For Windows
+### Для Windows
 
-1. Download the latest <code>LiteLoader-<i>version</i>.zip</code> from [Releases](https://github.com/LiteLDev/LiteLoader/releases) or [Actions](https://github.com/LiteLDev/LiteLoader/actions), 
-2. Unzip everything into the directory of `bedrock_server.exe`. If you are prompted with conflicting files during the decompression process, just select `Overwrite`.
-3. Ensure that the `bedrock_server.pdb` file exists.  
-   Run `LLPeEditor.exe` to generate the BDS with the exported symbols (`bedrock_server_mod.exe`)  
-4. When the console output `Press any key to continue. . . ` , press any key to close the window
-5. Execute `bedrock_server_mod.exe` and enjoy it !
+1. Загрузите последнюю <code>LiteLoader-<i>version</i>.zip</code> из [Релиза](https://github.com/LiteLDev/LiteLoader/releases) или [Действий](https://github.com/LiteLDev/LiteLoader/actions), 
+2. Распакуйте содержимое в каталог с `bedrock_server.exe`. В случае чего, выберите `Заменить`.
+3. Убедитесь что файл `bedrock_server.pdb` присутствует.  
+   Запустите `LLPeEditor.exe` что-бы сгенерировать модифицированный BDS (`bedrock_server_mod.exe`).
+4. Когда увидите `Press any key to continue. . . ` , нажмите любую кнопку что бы закрыть окно.
+5. Запустите `bedrock_server_mod.exe` и радуйтесь жизни!
 
-### For Linux
+### Для Linux
 
-#### Installation script(Ubuntu)
+#### Загрузочный скрипт(Ubuntu)
 
 ```
 wget https://github.com/LiteLDev/LiteLoaderBDS/raw/beta/Scripts/install.sh
@@ -23,18 +23,19 @@ chmod +x install.sh
 
 #### Docker
 
-Enter the following lines in your terminal: 
+Введите следущие строки в терминал: 
 ```
 docker pull shrbox/liteloaderbds
 docker create --name liteloader -p 19132:19132/udp -i -t shrbox/liteloaderbds
 ```
-Start server: `docker container start liteloader`  
-Stop server: `docker container stop -t 30 liteloader`  
-Enter console: `docker attach liteloader`  
-Exit console: Press `Ctrl + P + Q`. If you press `Ctrl + C`, the server process will exit.  
-If you want to manage server files, use `docker volume --help` for more details.
+Запустить сервер: `docker container start liteloader`  
+Остановить сервер: `docker container stop -t 30 liteloader`  
+Открыть консоль: `docker attach liteloader`  
+Закрыть консоль: Нажмите `Ctrl + P + Q`. Если нажать `Ctrl + C`, сервер выключиться.  
+Если вам нужно получить доступ к файлами, введите `docker volume --help` для подробностей.
+Серверные файла лежат по пути /var/lib/docker/volume/`volume_name`/data/ (замените volume_name на ваше название)
 
-Everything's done! Next, you can install **LiteLoader** plugins!
+Все готово! Теперь вы можете установить плагины на **LiteLoader**!
 
 <br>
 
