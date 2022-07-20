@@ -40,64 +40,68 @@ docker create --name liteloader -p 19132:19132/udp -i -t shrbox/liteloaderbds
 
 <br>
 
-## 🎯 Find & Install plugins
+## 🎯 Поиск и установка плагинов
 
-### Plugin downloads
+### Загрузка плагинов
 
-`LiteLoader` main plugin distribution channels.
+Основные способы получить плагины.
 
-- [Official Forum](https://forum.litebds.com/)
+- [Оффицальный форум](https://forum.litebds.com/)
 - [MineBBS](https://www.minebbs.com/resources/?prefix_id=59)
+- [Дискорд](https://discord.gg/pttSqAunHa)
+- [Телеграмм](https://t.me/LiteLoader)
+- [Телеграмм(СНГ)](https://t.me/RusLiteLoaderBDS)
 
-### Plugin installation
 
-1. If you downloaded a zip file, unzip it
-2. Place all the obtained contents directly into the `plugins` directory
-3. Run `bedrock_server_mod.exe` to start the service
+### Установка плагинов
 
-For more **installation and usage guides**,  come to 👉[LiteLoader documentation](https://docs.litebds.com/#/en/Usage/)👈 to view
+1. Если вы скачали архив, распакуйте его.
+2. Поместите содержимое в каталог `plugins`.
+3. Запустите `bedrock_server_mod.exe`.
 
-## Installation ResourcePacks/Addon
-Copy `.mcpack`, `.mcaddon` or `.zip` to `plugins/AddonsHelper` and restart server  
-You can manage ResourcePacks and Addons by using `addons` command
+Больше **гайдов** в 👉[Документации LiteLoader](https://docs.litebds.com/#/ru/Usage/)👈 
 
-## 🔌 Plugins hot management
+## Установка Ресурспаков/Аддонов
+Скопируйте `.mcpack`, `.mcaddon` или `.zip` в `plugins/AddonsHelper` и перезгрузите сервер.  
+Управлять Ресурспаками/аддонами можно через команду `addons`.
 
-Don't need to close server, you can manage plugins, we provided these console commands:
+## 🔌 Быстрое управление плагинами
+
+Не нужно перезапускать сервер что бы управлять плагинами, ведь есть следущие команды:
 
 - `ll list`  
-  **List** plugins
+  **Список** плагинов
 - `ll load ./plugins/xxxx.js`  
-  **Hot load** plugin which locate in target path. The path is relative to the BDS root directory.
+  **Быстрая загрузка** плагина который находиться по целевому пути. Путь относительно коренового каталога BDS.
 - `ll unload xxxx.lua`  
-  **Hot unload** plugin which called xxxx.lua
+  **Быстрое отключение** плагина под названием xxxx.lua
 - `ll reload xxxx.dll`  
-  **Reload** plugin which called xxxx.dll
+  **Перезагрузка** плагина под названием xxxx.dll
 - `ll reload`  
-  **Reload** all plugins
+  **Перезагрузка** всех плагинов
 - `ll version`  
-  Print version of LiteLoaderBDS
+  Получить версию LiteLoaderBDS
 - `ll upgrade`  
-  Check for updates
+  Проверить обновления
 
-#### Hot management common problem
+#### Проблемы быстрого управления плагинами
 
-- After a plugin is hot unloaded, the commands registered by this plugin are not removed. When the player uses those commands, it will prompt that the command does not exist
-- If your plugin has exported functions imported by other plugins, when you unload/reload this plugin, the corresponding Import of other plugins will be invalid.  
-- Do not unload or reload plugins when the server has not started, or when there are a lot of players on the server! Otherwise the server may crash
-- After hot reloading/hot reloading a plugin, the `onServerStarted` event registered by the plugin will be called immediately, and the player join event `onPlayerJoin` will be called one by one (because the server has been started at this time)
+- После выключения плагина, команды зарегестрированые этим плагинов не будут удалены. Когда попробует выполнить эти команды он получит сообщение что команды не существуют.
+- Если ваш плагин экспортирует функции, при перезагрузке этого плагина, плагины использующие его функции будут нерабочими.  
+- Не выгружайте или перезагружайте плагины когда сервер еще не запустился или на нем много игроков. Это может крашнуть сервер!
+- После перезапуска, ивент `onServerStarted` будет немедленно вызван плагином который вы перезагрузили, ивент `onPlayerJoin` так же будет немедленно вызван.
 
->[!WARNING]
+>[!Внимание]
 >
-> Plugin hot management is only used when debugging plugins. Avoid using **in production environments**
+> Быстрое управление предназначено для отладки. Избегайте использования **в рабочей среде**
 
-## 📡 ScriptEngine real time debug mode
+## 📡 Режим отладки ScriptEngine 
 
 - `jsdebug`  
-  Enter JS real time debug mode
+  Войти в режим отладки Js
 - `luadebug`  
-  Enter Lua real time debug mode
+  Войти в режим отладки Lua
 
-In real-time debugging mode, the standard input will be executed as scripting language, and the results will be output in real time.  
-If an error occurs, the engine will output an error message and a stack trace.  
-Entering the `jsdebug` or `luadebug` again will exit the real time debugg mode.
+В режиме отладки, стандартный вывод будет заменен скриптовым выводом в реальном времени.  
+При возникновении ошибки, движок выведет ошибку и трассировку стека.  
+Повторный вход в `jsdebug` или `luadebug` означает выход из режима отладки.
