@@ -33,7 +33,6 @@ docker create --name liteloader -p 19132:19132/udp -i -t shrbox/liteloaderbds
 Открыть консоль: `docker attach liteloader`  
 Закрыть консоль: Нажмите `Ctrl + P + Q`. Если нажать `Ctrl + C`, сервер выключиться.  
 Если вам нужно получить доступ к файлами, введите `docker volume --help` для подробностей.
-
 Серверные файла лежат по пути `/var/lib/docker/volume/volume_name/data/` (замените volume_name на ваше название).
 
 Все готово! Теперь вы можете установить плагины на **LiteLoader**!
