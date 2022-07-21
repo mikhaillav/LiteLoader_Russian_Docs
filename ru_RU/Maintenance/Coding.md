@@ -1,48 +1,48 @@
-## 🎯 Maintain the project and contribute code
+<!-- translated -->
 
-Since Mojang will modify the code every time it updates the BDS, some underlying APIs that use the Hook mechanism will become invalid. Therefore, the loader also needs to be maintained continuously with the version update, otherwise many functions will gradually lose their effectiveness. 
+## 🎯 Поддержка проекта и добавление кода
 
-Due to the need for strong technical capabilities for related maintenance, community talents in this area have been in a relatively scarce state. 
-Therefore, if you are interested in participating in the maintenance of the project and contributing code, we are absolutely very welcoming.
+Поскольку Mojang будет изменять свой код каждый раз при обновлении BDS, некоторые базовые API, использующие механизм Hook, станут недействительными. Поэтому загрузчик тоже нужно постоянно поддерживать с обновлением версии, иначе многие функции постепенно потеряют свою актуальность.
 
-<br>
-
-### If you...
-
-#### Have C++ development skills that are relatively lacking, but you would like to contribute to the project:
-
-- You can actively develop plug-ins for LiteLoader, which is a great way to help by building the LiteLoader ecosystem.
-- You can help modify and optimize the development documentation, propose the API you want and push it to the author, and give everyone some ideas for improvement.
-- You can help publicize and promote LiteLoader so that more people can participate in this project, and you can also help newbies and answer their questions.
-
-#### Have some C++ / script development ability, have used or are interested in learning how to use the ScriptX cross-language scripting engine:
-
-- You can maintain the interface layer API of LiteLoader and LiteLoader scripting engine, fix certain problems, and propose improvements.
-- You can help implement more infrastructure for LiteLoader and LiteLoader scripting engine, like a full network library, a full JSON parsing system, etc.
-
-#### Have strong C++ development ability, and have some grasp of the underlying technology
-
-- You can help maintain the C++ API part of LiteLoader and suggest solutions when problems are found.
-- You can help to use IDA to parse the pdb symbol database and discover new available event points and API functions to add to LiteLoader.
-- You can suggest improvements to our underlying mechanisms and help us put good ideas into practice.
-
-#### Bottom-level developer / Algorithm competition master / Reverse wizard / Experienced developer
-
-- You can deeply participate in the development and advancement of all aspects of the project, help optimize LiteLoaders's code and facilities, improve or even renovate the architecture.
-- You can help to improve the underlying mechanism, improve operating efficiency, or contribute code to improve the algorithm of key parts.
-- You can put forward your thoughts and ideas for the future development of LiteLoader, and be a guide for the future.
+Связи с такими частыми обновлениями нам нужны разработчики, к сожалению таланты сообщества в этой области сейчас в относительно скудном состоянии.
+Поэтому, если вы заинтересованы в поддержке проекта и внесении кода, мы будем очень рады.
 
 <br>
 
-Contributions to the LiteLoaderBDS project and the ScriptX project are welcome. You are an important support for the development of LiteLoaderBDS.
-As long as you want, the door of the open source community will always be open to you!
+### Если вы...
+
+#### Имеете недостаточно навыков разработки на C++, но вы хотели бы внести свой вклад в проект:
+
+- Вы можете разрабатывать плагины для LiteLoader, это отличный вариант помочь нам построить экосистему LiteLoader.
+- Вы можете помочь изменить и оптимизировать документацию по разработке, предложить нужный API и отправить его автору, а давать идеи по улучшению.
+- Вы можете помочь популяризировать и продвигать LiteLoader, чтобы больше людей могли участвовать в этом проекте, а также можете помогать новичкам и отвечать на их вопросы.
+
+#### Обладаете некими навыками для разработки на C++/скриптов, использовали или заинтересованы в изучении того, как использовать скриптовый движок ScriptX:
+
+- Вы можете поддерживать API LiteLoader и LiteLoader ScriptEngine, исправлять ошибки и предлагать улучшения.
+- Вы можете помочь внедрить дополнительные инструменты для LiteLoader и LiteLoader ScriptEngine, например полную сетевую библиотеку, полную систему парсинга JSON и т. д.
+
+#### Обладаете хорошими навыками для разработки на C++ и иметь некоторорую базу.
+
+- Вы можете помочь поддерживать часть LiteLoader, связанную с C++ API и предлагать решения при обнаружении проблем.
+- Вы можете помочь использовать IDA для анализа символов pdb и обнаружения новых функций API для добавления в LiteLoader.
+- Вы можете предложить улучшения наших основных механизмов и помочь нам реализовать ваши идеи на практике.
+
+#### Разработчик нижнего уровня / Мастер по алгоритмам / Реверс инженер / Опытный разработчик
+
+- Вы можете активно участвовать в разработке и продвижении всех аспектов проекта, помогать оптимизировать код и возможности LiteLoader, улучшать или даже обновлять архитектуру.
+- Вы можете помочь улучшить базовый механизм, повысить эффективность работы или предоставить код для улучшения алгоритма ключевых частей.
+- Вы можете высказать свои мысли и идеи по дальнейшему развитию LiteLoader.
 
 <br>
 
-### Examples of Specific Maintenance Methods
+Вклад в проект LiteLoaderBDS и проект ScriptX приветствуется. Вы оказываете важную поддержку развитию LiteLoaderBDS.<br>
+Двери open source сообщества всегда будут для вас открыты!
 
-According to the current program structure and code arrangement, for some specific maintenance requirements, we will point out the direction for everyone.
+<br>
 
-#### Maintain
+### Примеры конкретных методов обслуживания
+
+В соответствии с текущей структурой проекта и расположением кода, мы укажем направление для всех.
 
 <br>
