@@ -1,44 +1,46 @@
-## 📜 Get System Information API
+<!-- translated -->
 
-The following APIs provide interfaces to obtain necessary system information:
+## 📜 API информации об системе
 
-### Get Current Time String  
+Следующие API предоставляют интерфейсы для получения системной информации:
+
+### Получить текущее время (Строка)
 
 `system.getTimeStr()`
 
-- Return value: The current time string, using the local time zone and 24-hour clock.
-  For example: `2021-04-03 19:15:01`
-- Return value type: `String`
+- Возращаемое значение: Строка текущего времени с использованием местного часового пояса и 24-часового формата.
+  Пример значения: `2021-04-03 19:15:01`
+- Тип возращаемого значения: `Строка`
 
 <br>
 
-### Get the Current Time Object
+### Получить объект текущего времени
 
 `system.getTimeObj()`
 
-- Return value: The current time object `Object`)
+- Возращаемое значение: Объект текущего времени (`Объект`)
 
-- Return value type:  `Object<Integer,Integer,Integer,Integer,Integer,Integer,Integer>`
+- Тип возращаемого значения:  `Объект<Число,Число,Число,Число,Число,Число,Число>`
 
-  -     For the returned time object tm, there are the following members:
+- Объект текущего времени:
 
   | Field | Meaning              | Data Type |
   | ----- | -------------------- | --------- |
-  | tm.Y  | Year value (4 digits)| `Integer` |
-  | tm.M  | Month value          | `Integer` |
-  | tm.D  | Day value            | `Integer` |
-  | tm.h  | Hour value (24-hour clock)|`Integer` |
-  | tm.m  | Minute value         | `Integer` |
-  | tm.s  | Seconds value        | `Integer` |
-  | tm.ms | Millisecond value    | `Integer` |
+  | tm.Y  | Year value (4 digits)| `Число` |
+  | tm.M  | Month value          | `Число` |
+  | tm.D  | Day value            | `Число` |
+  | tm.h  | Hour value (24-hour clock)|`Число` |
+  | tm.m  | Minute value         | `Число` |
+  | tm.s  | Seconds value        | `Число` |
+  | tm.ms | Millisecond value    | `Число` |
 
 <br>
 
-### Randomly Generate a Guid String
+### Генерация случайного GUID
 
 `system.randomGuid()` 
 
-- Return value: A randomly generated unique identifier GUID.
-- Return value type:  `String`
+- Возращаемое значение: Случайно сгенерированный GUID.
+- Тип возращаемого значения:  `String`
 
 <br>
