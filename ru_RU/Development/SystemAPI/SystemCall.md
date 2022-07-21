@@ -1,56 +1,55 @@
-## 📡 System Call API 
+## 📡 API системного вызова 
 
-The following APIs provide interfaces to perform some system calls:
+Следущие API предоставляют интерфейсы для некоторых системных вызовов:
 
-### Invoke the Shell to Execute the Specified System Command
+### Выполнение указанной системной команды
 
 `system.cmd(cmd,callback[,timeLimit])`
 
-- Parameters:
+- Параметры:
   - cmd : `String`  
-    The executed system command.
+    Команда которую надо выполнить.
   - callback : `Function`  
-    The callback function used to return data after the system process ends.
+    Обратный вызов функции который вернет результат выполнения команды.
   - timeLimit : `Integer`  
-    (Optional parameter) The maximum time for the command to run, in milliseconds.
-    The default is `-1`, i.e. unlimited runtime 
-- Return value: Whether the command was successfully started.
-- Return value type: `Boolean`
+    (Опциональный параметр) Максиальное время выполнения команды в милисекундах.
+    По умолчанию `-1`, тоесть сколько потребуется.
+- Возвращаемое значение: Была ли команда успешно запущена.
+- Тип возвращаемого значения: `Boolean`
 
-Note: The prototype of the callback function of the parameter callback: `function(exitcode,output)`  
+Примечание. Прототип функции обратного вызова: `function(exitcode,output)`  
 
 - exitcode : `Integer`    
-  The process exit code.
+  Exit code процесса.
 - output : `String`  
-  The contents of standard output and standard error.
+  Результат выполнения команды.
 
-Notice! What is executed here is not the command of the MC command system.
-This function works asynchronously. It will not wait for the system to execute the command before returning, but the engine will automatically call the given callback function to return the result. 
-
+Уведомление! То, что здесь выполняется, не является командой Minecraft.
+Эта функция работает асинхронно. Она не будет ждать, пока система выполнит команду перед возвратом, но движок автоматически вызовет данную функцию обратного вызова, чтобы вернуть результат.
 <br>
 
-### Run the Specified Location Program
+### Запустить отдельную программу
 
 `system.newProcess(process,callback[,timeLimit])`
 
-- Parameters:
+- Параметры:
   - process : `String`  
-    The path of the program to run (with command line arguments).
+    Путь до выполняемой программы(с аргументами).
   - callback : `Function`  
-    The callback function used to return data after the program process ends.
+    Функция обратного вызова, возвращает результаты выполнения.
   - timeLimit : `Integer`  
-    (Optional parameter) The maximum time limit for the program process to run, in milliseconds.  
-    The default is `-1`, i.e. unlimited runtime.
-- Return value: Whether the process was successfully started.
-- Return value type: `Boolean`
+    (Опциональный параметр) Максимальное время выполнения программы.  
+    По умолчанию `-1`, тоесть сколько потребуется.
+- Возвращаемое значение: Была ли программа успешно запущена.
+- Тип возвращаемого значения: `Boolean`
 
-Note: The prototype of the callback function of the parameter callback: `function(exitcode,output)`  
+Примечание. Прототип функции обратного вызова: `function(exitcode,output)`  
 
 - exitcode : `Integer`    
-  Process exit code.
+  Exit code процесса.
 - output : `String`  
-  The contents of the program's standard output and standard error output.
+  Результат выполнения команды.
 
-This function works asynchronously. It will not wait for the system to execute the command before returning, but the engine will automatically call the given callback function to return the result.
+Эта функция работает асинхронно. Она не будет ждать, пока система выполнит программу перед возвратом, но движок автоматически вызовет данную функцию обратного вызова, чтобы вернуть результат.
 
 <br>
