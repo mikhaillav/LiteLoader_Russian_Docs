@@ -1,15 +1,18 @@
-## 💕 Finally
+<!-- translated -->
 
-The construction of an open source community is bound to be a process of gradual development. The BDS plug-in development circle is just at the stage of growth, and there are some shortcomings in all aspects, and I hope everyone can understand. 
+## 💕 В заключение
 
-Unconsciously, MC has also accompanied us through twelve or three years. This game, which became popular all over the world shortly after its launch, still dominates one side, why does it attract our attention so much? It's simple: a free world, with great extensibility, that's one of the most central parts of the Minecraft ethos. Today, the ecology of the Java version of MC can be said to be perfect and free, but the bedrock is relatively lacking. Of course, there are various factors, and in my opinion, a perfect and active community ecology is in which played a very important role. Under the circumstances that the development time and experience cannot be compared with JE, is there any way to reproduce the glory of the era of JE many years ago? Quite simply, the opportunity is now in your hands. 
+Построение сообщества с открытым исходным кодом неизбежно приведет к развитию проекта. Разработка плагинов BDS находится только в стадии разработки, и во всех аспектах есть некоторые недостатки, и я надеюсь, что все это понимают.
 
-《Mencius》has a cloud: *Therefore, when heaven will give a great responsibility to a man, he must first suffer his mind and will, labor his muscles and bones, starve his body and skin, empty his body, and disturb his actions. Can't*. Indeed, today we are exploring a path not many have traveled before. In the face of today's many challenges, do you have the ideas and confidence to face the problems and help us create a better world?
+Разумеется Minecraft сопровождал нас в течение долгих лет. Эта игра, ставшая популярной во всем мире вскоре после своего запуска, до сих пор остается популярной, почему же она так привлекает наше внимание? Все просто: свободный мир с большими возможностями для творчества — это одна из базовых частей духа Minecraft. Сегодня можно сказать, что Java-версия Minecraft идеальна и свободна. Конечно, есть разные факторы, и на мой взгляд, очень важную роль в этом сыграла совершенная и активная дяетельность сообщества. В условиях, когда время разработки и опыт не идут ни в какое сравнение с Java-версией, есть ли способ воспроизвести славу эпохи Java многолетней давности? Проще говоря, все теперь в ваших руках.
 
-Come with us! 
+《Mencius》однажды сказал: *Therefore, when heaven will give a great responsibility to a man, he must first suffer his mind and will, labor his muscles and bones, starve his body and skin, empty his body, and disturb his actions.* Действительно, сегодня мы идем по ранее не изведаной тропе, создаем путь для тех кто будет после нас. Перед лицом сегодняшних многочисленных проблем, есть ли у вас силы и терпение, чтобы справиться с проблемами и помочь нам создать лучший мир?
+
+
+Погнали! 
 
 ⭐
 
-[Click here](https://github.com/LiteLDev/LiteLoaderBDS) to go to the `LiteLoaderBDS` GitHub repository.
+[Тык](https://github.com/LiteLDev/LiteLoaderBDS) что бы перейти в GitHub `LiteLoaderBDS`.
 
 <br>
