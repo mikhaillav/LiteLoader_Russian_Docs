@@ -1,13 +1,15 @@
-# LLSE - Project Maintenance and Support Documentation
+<!-- translated -->
 
-## ⛳  Welcome!
+# LLSE - Поддержка проекта
 
-Maybe, you have used LiteLoader ScriptEngine to develop plug-ins for a long time. As an experienced developer, you have your own ideas on the development of the project;
-Maybe, you are a big guy who has just come into contact with LLSE, you are very interested in its functions and architecture, and you want to do research; 
-Maybe, you are an experienced old bean curd, and you want to help the LLSE project develop better and contribute to your own server plug-in; 
-Maybe, ...
+## ⛳  Приветсвуем!
 
-Every developer and contributor who is interested in participating in the maintenance of the LiteLoader (ScriptEngine) project is welcome here! 
-Without your contributions, LLSE would have lost a lot of energy and innovation. 
+Может, вы используете LiteLoader ScriptEngine для разработки плагинов длительное время. Как опытный разработчик, у вас есть свои идеи по разработке проекта; <br>
+Может, вы большой мальчик кто только что познакомился с LLSE, вы заинтерисованы в его функциях и архитектуре и вы хотите понять как оно работает; <br>
+Может, вы опытный old bean curd, и вы хотите помочь проекту LLSE развиваться лучше и внести свой вклад в свой собственный серверный плагин; <br>
+Может, ... Не важно. 
 
-The following will be a brief analysis of the project architecture and instructions on maintaining the project and contributing code. Hope you can get the information you want from it.
+Каждому разработчику и участнику кто хочет помочь в разработке LiteLoader (ScriptEngine) добро пожаловать! <br>
+Без вашего сотрудничества, LLSE потерял бы много идей и возможностей. 
+
+Далее будет краткий анализ архитектуры проекта и инструкции по поддержке проекта и добавлению кода. Надеюсь, вы сможете получить от него нужную информацию.
