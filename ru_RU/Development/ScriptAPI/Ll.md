@@ -1,116 +1,119 @@
-## 💡 Plugin loading related API
+<!-- working -->
+<!-- by shishkevichd -->
 
-Some interfaces related to loader operations are provided here. 
+## 💡 API загрузки плагинов
 
-### Get LiteLoader loader version
+Некоторые интерфейсы, связанные с операциями LiteLoaderBDS, представлены здесь.
+
+### Получить версию LiteLoaderBDS
 
 `ll.version()`
 
-- Return value: loader version object `Object`) 
+- Возращаемое значение: объект версии LiteLoaderBDS (`Object`) 
 
-- Return value type:  `Object<Integer,Integer,Integer,Boolean>`
+- Тип возращаемого значения:  `Object<Integer,Integer,Integer,Boolean>`
 
-  - For a returned loader version object ver, there are the following members:
+- Для возвращаемого объекта версии LiteLoaderBDS `Ver` есть следующие значения:
 
-  | Member       | Meaning                              | Data Type  |
+  | Значение       | Обозначение                              | Тип  |
   | ------------ | ------------------------------------- | --------- |
-  | ver.major    | Major Version Number (example:  the **2** in **2**.1.0)   | `Integer` |
-  | ver.minor    | Minor Version Number (ex: the **1** in 2.**1**.0)    | `Integer` |
-  | ver.revision | Revision Number: (ex: the **0** in 2.1.**0**)  | `Integer` |
-  | ver.isBeta   | Whether the current version is a beta version  | `Boolean` |
+  | ver.major    | Мажорное число версии (пример **2** в **2**.4.1)   | `Integer` |
+  | ver.minor    | Минорное число версии (пример **4** in 2.**4**.1)    | `Integer` |
+  | ver.revision | Патчевое число версии (пример **1** in 2.4.**1**)  | `Integer` |
+  | ver.isBeta   | Является ли эта версия бетой  | `Boolean` |
 
 <br>
 
-### Get LiteLoader loader version string
+### Получить версию LiteLoaderBDS (Строка)
 
 `ll.versionString()`
 
-- Return value: loader version
-- Return value type:  `String`
+- Возращаемое значение: версия LiteLoaderBDS
+- Тип возращаемого значения:  `String`
 
 <br>
 
-### Check LiteLoader loader version
+### Проверить версию LiteLoaderBDS
 
 `ll.requireVersion(major[,minor,revision])`
 
-- Parameter: 
+- Параметры: 
   - major: `Integer`  
-    Check if the major version number of the currently installed LL is >= this value.
-  - minor: `Integer` (optional parameter)
-    Check if the minor version number of the currently installed LL is >= this value.
-  - revision: `Integer` (optional parameter)  
-    Check if the revision number of the currently installed LL is >= this value.
-- Return value: Test result
-- Return value type:  `Boolean`
+    Проверка, является ли мажорное число версии установленного в настоящее время LL >= указанного значения.
+  - minor: `Integer` (на свое усмотрение)
+    Проверка, является ли минорное число версии установленного в настоящее время LL >= указанного значения.
+  - revision: `Integer` (на свое усмотрение)  
+    Проверка, является ли патчевое число версии установленного в настоящее время LL >= указанного значения.
+- Возращаемое значение: Результат проверки
+- Тип возращаемого значения:  `Boolean`
 
-If the detection finds that the currently installed version of LLSE is lower than the value passed in, it will return `false`. 
-You can choose to judge based on the results and report an error to remind users to upgrade their LiteLoader (LLSE) version.
+Если обнаружение обнаружит, что установленная в настоящее время версия LLSE ниже, чем передаваемое значение, оно вернется `false`. 
+Вы можете сообщить об ошибке, чтобы напомнить пользователям обновить версию LiteLoaderBDS (LLSE).
 <br>
 
-### List all loaded plugins
+### Список загруженных плагинов
 
 `ll.listPlugins()`
 
-- Return value: A list containing the names of all loaded plugin
-- Return value type:  `Array<String,String,...>`
+- Возращаемое значение: Список имен загруженных плагинов
+- Тип возращаемого значения:  `Array<String,String,...>`
 
 <br>
 
-### Remote Function Call
+### Вызов удаленной функции
 
-In order to allow the pre-plug-ins developed by developers to provide interfaces and services for other plug-ins, the remote function call function is provided here, so that one LLSE plug-in can call the existing functions in another plug-in. 
+Чтобы предоставить разработчикам функции, разработанные другими разработчиками, для других плагинов представлена функция вызова удаленной функции, чтобы один плагин, написанный на LLSE, мог вызвать существующие функции в другом плагине.
 
-#### Export Function 
+#### Функция экспорта 
 
-First, in order for the functions in your plug-in to be located by other plug-ins, you first export some functions in your plug-in, so that others can find your interface by name. Use this function to export the functions you want to share:
+Во-первых, для того, чтобы функции в вашем плагине были используемыми для других плагином, вы сначала экспортируете некоторые функции в своем плагине, чтобы другие могли найти ваш интерфейс по имени. Используйте эту функцию, чтобы экспортировать функции, с которыми вы хотите поделиться:
 
 `ll.export(func,name)`
 
-- Parameter: 
+- Параметры: 
   - func : `Function`  
-    Function to be exported
+    Экспортируемая функция
   - name : `String`  
-    The export name of the function. Other plugins call this function based on the export name.
-- Return value: Whether the export was successful.
-- Return value type:  `Boolean`
+    Название функции при экспорте
+- Возращаемое значение: Был ли экспорт успешен.
+- Тип возращаемого значения:  `Boolean`
 
-Note: If there is a name conflict when exporting, the export will fail. You may need to add some unique prefix or suffix to the export name to avoid possible conflicts with other plugins.
+Примечание. Если при экспорте есть конфликт имени, экспорт будет неудачным. Вам может потребоваться добавить уникальный префикс или суффикс к имени экспорта, чтобы избежать возможных конфликтов с другими плагинами.
 
 <br>
 
-#### Export Function
+#### Функция экспорта
 
-In order to allow the pre-plug-ins developed by developers to provide interfaces and services for other plug-ins, the remote function call function is provided here, so that an LL or LLSE plug-in can call the existing functions in another plug-in.
+Чтобы предоставить разработчикам функции, разработанные другими разработчиками, для других плагинов представлена функция вызова удаленной функции, чтобы один плагин, написанный на `LLSE` или `LL`, мог вызвать существующие функции в другом плагине.
 
 `ll.export(func,namespace,name)`
 
-- Parameter: 
+- Параметры: 
   - func : `Function`  
-    Function to be exported
+    Экспортируемая функция
   - namespace : `String`  
-    The namespace name of the function, which is only convenient for distinguishing the API exported by different plugins.
+    Имя пространства имен функции, которое удобно для различения API, экспортируемого различными плагинами.
   - name : `String`  
-    The export name of the function. Other plugins call this function based on the export name.
-- Return value: Whether the export was successful.
-- Return value type:  `Boolean`
+    Название функции при экспорте
+- Возращаемое значение: Был ли экспорт успешен.
+- Тип возращаемого значения:  `Boolean`
 
-Note: If you export a function with an existing namespace and name, the export will fail. This API is currently only available under `debugMode`.  
+Примечание. Если вы экспортируете функцию с существующим пространством имен и именем, экспорт будет неудачным. Это API в настоящее время доступен только в режиме отладки (`debugMode`).  
 
 <br>
 
-#### Import Function
+#### Функция импорта
 
 After you have learned that there is a plug-in exporting function, in order to use the function exported by him, you first need to import this function into your own scripting system.
 LLSE provides the interface import to import functions already exported by other plugins. 
 
 `ll.import(name)`
 
-- Parameter: 
+- Параметры: 
   - name : `String`  
     The export name used by the function to be imported.
-- Return value: the imported function
-- Return value type:  `Function`
+- Возращаемое значение: the imported function
+- Тип возращаемого значения:  `Function`
 
 `ll.import` will import the target function directly into your scripting environment. Therefore, you can call an imported function as if you were using an existing function. The process of calling across plugins will be done automatically in the background, you don't need to worry about any of this.
 
@@ -125,13 +128,13 @@ LLSE provides the interface import to import functions already exported by other
 
 `ll.import(namespace,name)`
 
-- Parameter: 
+- Параметры: 
   - namespace : `String`  
     The namespace name used by the function that is being imported.
   - name : `String`  
     The name of the function that is being imported.
-- Return value: The imported function
-- Return value type:  `Function`
+- Возращаемое значение: The imported function
+- Тип возращаемого значения:  `Function`
 
 `ll.import` will import the target function directly into your scripting environment. Therefore, you can call an imported function as if you were using an existing function. The process of calling across plugins will be done automatically in the background, you don't need to worry about any of this.
 
@@ -164,13 +167,13 @@ LLSE provides the following interface to preload the dependent libraries require
 
 `ll.require(path[,remotePath])`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
     Library dependency filename (Example: `addplugin.js`)
   - remotePath : `String`  
     (Optional parameter) The path to find and load dependent libraries, see below for instructions.
-- Return value: Whether the dependent library is loaded successfully 
-- Return value type:  `Boolean`
+- Возращаемое значение: Whether the dependent library is loaded successfully 
+- Тип возращаемого значения:  `Boolean`
 
 For execution, use `ll.require`, then LLSE will perform the following series of operations:
 
@@ -190,10 +193,10 @@ Authors of dependent libraries can host relevant code on stable large websites s
 
 `ll.eval(str)`
 
-- Parameter: 
+- Параметры: 
   - str : `String`  
     String to execute as a Script
-- Return value: Execution result
-- Return value type:  `Any Type`
+- Возращаемое значение: Execution result
+- Тип возращаемого значения:  `Any Type`
 
 Different from the above mentioned `ll.require`, the script code executed here is directly executed in the engine corresponding to the current plugin, similar to the eval mechanism of each language.
