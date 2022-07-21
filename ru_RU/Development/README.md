@@ -1,3 +1,5 @@
+<!-- translated -->
+
 # LLSE - Обзор разработки плагинов LLSE 
 
 ## ⛳ Начало
@@ -14,13 +16,13 @@
 
 <br>
 
-## 💊 Типы переменных
+## 💊 Типы данных
 
-As we all know, the type system is usually a more critical part of a design framework. 
-So, first, you need to be familiar with several data types that you will use frequently when working with API documentation. 
-The nouns of these data types appear frequently in the development documentation, so be sure to be familiar with them first. 
+Как мы все знаем, система типов обычно является более важной частью структуры.
+Итак, во-первых, вам нужно ознакомиться с несколькими типами данных, которые вы будете часто использовать при работе с документацией по API.
+Существительные этих типов данных часто встречаются в документации по разработке, поэтому сначала обязательно ознакомьтесь с ними.
 
-### Generic Data Type Conventions
+### Основные типы данных
 
 Хотя скриптовые языки обычно слабо типизированы, нет необходимости обращать внимание на конкретные типы данных, но поскольку LLSE поддерживает множество различных скриптовых языков, для облегчения стыковки API, некоторых общих типов данных и отображения отношения к соответствующим типам языка сценариев определены ниже.
 
@@ -45,56 +47,56 @@ The nouns of these data types appear frequently in the development documentation
 - `Block` - Обьект блока
 - `BlockEntity` - Обьект блока-сущности
 - `Item` - Обьект предмета в инвентаре 
-- `Device` - Player equipment information object
-- `Container` - container object
-- `Objective` - Scored item object 
-- `NBT` - NBT Tag object 
-- `SimpleForm` - Normal form objects 
-- `CustomForm` - Custom form objects 
-- `Conf` - Configuration file object 
-- `DB` - Database objects 
-- `File` - File object 
-- `WSClient` - WebSocket client object 
-- `Enum` - Enumeration type, usually stored in some type, providing some limited range of options.
+- `Device` - Обьект устройства игрока
+- `Container` - Обьект контейнера
+- `Objective` - Обьект предмета ScoredBoard
+- `NBT` - Обьект NBT-тега
+- `SimpleForm` - Обьект обычной формы 
+- `CustomForm` - Обьект кастомной формы 
+- `Conf` - Обьект конфига
+- `DB` - Обьект базы данных
+- `File` - Обьект файла
+- `WSClient` - Обьект клиента WebSocket
+- `Enum` - Обьект перечисления.
 
 <br>
 
-## 📌 API Documentation Description Conventions
+## 📌  Условные обозначения документации API
 
-As we all know, a good help document is naturally inseparable from a unified and concise format and a clear appearance. 
-Therefore, in order to unify and standardize the format of the document, it is necessary to uniformly specify the description convention of LLSE's help document. 
+Как мы все знаем, хороший справочный документ естественно неотделим от унифицированного и лаконичного формата и понятного внешнего вида.
+Следовательно, чтобы стандартизировать формат документа, необходимо единообразно указать соглашение об описании справочного документа LLSE. 
 
-> For all the API documentation you see next, there are writing rules like this: 
+> Для всей API документации, которую вы видите, существуют следущие правила написания: 
 
-Regarding the description of function parameter types in the documentation:
-Function parameters will be described in the format parameter name: parameter type
-For example: cmd : String represents a string type variable cmd
-If Array<...> appears in the parameter type, it means an array/list containing the variables within <>
+Относительно описания типов параметров функций в документации:
+Параметры функции будут описаны в формате: `имя параметра: тип параметра`
+Например: `cmd : String` представляет переменную cmd строкового типа 
+Если в типе параметра появляется `Array<...>`, это означает массив/список, содержащий переменные внутри <>
 
-1. About the description of **function parameter types** in the documentation:
-   The function parameters will follow **Paameter Name : Parameter Type** Format description example: cmd : `String` means a **String** variable of type **cmd**  
-   The parameter type `Array<...>`, represents an array/list containing the variables within <>.
-   
+1. Про описание **типов параметров функций** в документации:
+    Параметры функции будут следовать **Имя параметра: Тип параметра**.
+    Пример описания формата: `cmd: String` означает переменную **cmd** типа **String**
+    Тип параметра `Array<...>` представляет собой массив/список, содержащий переменные внутри <>.
 
-2. About the description of **optional parameters** in the documentation:  
-   If `optional parameters` appears in the parameter descripton, it means that you have the option to not pass this parameter.
-   When you do not pass this parameter, the engine will use the default value given in the description.
-   For example: `pl.tell(msg[,type])`, where `type` is an optional parameter.
-
-<br>
-
-After you are familiar with the above infrastructure, you can start to read the documentation for each other specific content step by step. 
-If you come across something you forgot, you can look it up more. 
+2. Про описание **опциональных параметры функций** в документации:  
+   Если `опциональный параметр` появляется в описании параметра, это означает, что можно не передавать этот параметр.
+   Если не передавать такой параметр, LLSE выберет значение по умолчанию, указаное в описании.
+   Например: `pl.tell(msg[,type])`, где `type` опциональный параметр.
 
 <br>
 
-## 📜 Plugin Development Tips
+После того, как вы ознакомитесь с вышеуказанной инфраструктурой, вы можете начать шаг за шагом читать документацию для каждого момента LLSE.
+Если вы наткнетесь на что-то, что забыли, вы можете поискать в документации.
 
-Here, there are some suggestions when developing plugins, I hope they can help you 
+<br>
 
-- **Don't reinvent** the wheel
-  When possible, try to use libraries that have been written by others for specific functions, rather than writing each function yourself. In this way, it is conducive to the integration and development of the ecology. 
-- Think about the **user**
-  When designing the interface and configuration, it is best to take the user's feelings into account. The content of external interaction such as UI and commands should be as clear and clear as possible, in line with normal usage habits. 
-- From multiple perspectives, **innovation** occurs  
-  Everyone is encouraged to learn from the excellent plugins already available in JE, and everyone is welcome to make their own innovations.
+## 📜 Советы разработчикам
+
+Здесь есть несколько советов по разработке плагинов, надеюсь, они вам помогут:
+
+- **Не изобретайте** велосипед <br>
+  По возможности старайтесь использовать библиотеки, написанные другими для конкретных функций, а не писать каждую функцию самостоятельно. Таким образом, это способствует интеграции и развитию экологии. И просто сэкономит вам время.
+- Подумайте про **пользователя** <br>
+  При проектировании интерфейса и конфигурации лучше всего учитывать чувства пользователя. Содержание внешнего взаимодействия, такого как пользовательский интерфейс и команды, должны быть максимально ясным и понятным, даже для рядовых пользователей.
+- **Инновации** везде <br>
+  Можно учиться на превосходных плагинах, уже доступных в JE и в случае чего каждый может вносить туда свои собственные инновации.
