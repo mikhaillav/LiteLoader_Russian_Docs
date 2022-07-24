@@ -1,55 +1,57 @@
-## 🌏 Web Interface API
+<!-- working -->
 
-The following APIs provide the basic network interface for scripts.
-If there are more complex needs, the network library of the respective language platform can be used to complete the task.
+## 🌏 API веб интерфейса
 
-### Send an Asynchronous HTTP(s) Get Request  
+Следущие API предоставляют базовые веб функции для ваших скриптов.
+Если есть более сложные потребности, для выполнения задачи можно использовать сетевую библиотеку соответствующей языковой платформы.
+
+### Отправить асинхронный httpGet запрос 
 
 `network.httpGet(url,callback)`
 
-- Parameters: 
+- Параметры: 
   - url : `String`  
-    The target address of the request (including the parameters attached to the Get request).
+    Целевой адресс (включая параметры для создания Get запроса).
   - callback : `Function`  
-    The callback function to execute when the request returns, to return the HTTP(s) response result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    Функция обратного вызова, выполняется что бы получить результат запроса.
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возвращаемого значения: `Boolean`.
 
-Note: The prototype of the callback function of the parameter callback: `function(status,result)`  
+Примечание. Прототип функции обратного вызова: `function(exitcode,output)`  
 
 - status : `Integer`    
-  The returned HTTP(s) response code, such as 200 means the request was successful.
+  Возвращает код ответа HTTP, 200 значит что запрос выполнен успешно.
 - result : `String`  
-  The returned data.
+  Возвращаемые данные.
 
-If the request fails, the status value will be `-1`. 
+Если запрос не удался, `status` будет равен `-1`. 
 
 <br>
 
-### Send an Asynchronous HTTP(s) Post Request  
+### Отправить асинхронный httpPost запрос 
 
 `network.httpPost(url,data,type,callback)`
 
-- Parameters: 
+- Параметры: 
   - url : `String`  
-    The destination address of the request.
+    Адресс назначения запроса.
   - data : `String`  
-    The data being sent.
+    Данные для отправки.
   - type : `String`  
-    The Post data type sent, in the form of `text/plain` `application/x-www-form-urlencoded`.
+    Данные Post запроса могут быть типа `text/plain` или `application/x-www-form-urlencoded`.
   - callback : `Function`  
-    The callback function to execute when the request returns, to return the HTTP(s) response result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    Функция обратного вызова, выполняется что бы получить результат запроса.
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возвращаемого значения: `Boolean`.
 
-Note: The prototype of the callback function of the parameter callback: `function(status,result)`  
+Примечание. Прототип функции обратного вызова: `function(exitcode,output)`  
 
 - status : `Integer`    
-  The returned HTTP(s) response code, such as 200 means the request was successful.
+  Возвращает код ответа HTTP, 200 значит что запрос выполнен успешно.
 - result : `String`  
-  The returned data.
+  Возвращаемые данные.
 
-If the request fails, the status value will be `-1`.
+Если запрос не удался, `status` будет равен `-1`. 
 
 <br>
 
