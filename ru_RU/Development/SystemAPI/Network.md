@@ -55,70 +55,70 @@
 
 <br>
 
-## 🔌 WebSocket Client Object API
+## 🔌 API WebSocket клиент 
 
-In LLSE, use "WebSocket objects" to manipulate the connection and work of a WebSocket client.
+В LLSE, используйте "обьект WebSocket" для подключения и работы с клиентом WebSocket.
 
-### Create a New WebSocket Client Object 
+### Создание обьекта WebSocket Client Object 
 
 [JS] `new WSClient()`  
 [Lua] `WSClient()`
 
-- Return value: A new WebSocket client object.
-- Return value type: `WSClient`
+- Возвращаемое значение: Обьект нового клиента WebSocket.
+- Тип возвращаемого значения: `WSClient`
 
 <br>
 
-### WebSocket Client Object - Properties
+### Объект клиента WebSocket — свойства
 
-Every WS client object contains some fixed object properties. for a specific file object `wsc`, has the following properties:
+Каждый объект клиента WS содержит некоторые фиксированные свойства. Для определенного объекта `wsc` имеет следующие свойства:
 
-| Attributes | Meaning        | Data Type   |
+| Атрибут | Значение        | Тип  |
 | ---------- | -------------- | ------ |
-| wsc.status | Current Connection Status | `Enum` |
+| wsc.status | Статус подключения | `Enum` |
 
-These object properties are read-only and cannot be modified.
+Эти свойства доступны только для чтения и не могут быть изменены
 
-Among them, the wsc.status enumeration has the following situations:
+Среди них wsc.status имеет следующие значения:
 
-`wsc.Open` - In normal connection.  
-`wsc.Closing` - Disconnecting.  
-`wsc.Closed` - Not connected.
+`wsc.Open` - Стабльное соединение.  
+`wsc.Closing` - Отключение.  
+`wsc.Closed` - Отключен.
 
 <br>
 
-### WebSocket Client Object - Function
+### Объект клиента WebSocket — функции
 
-Every WS client object contains some member functions (member methods) that can be executed. for a specific file object `wsc`, you can perform some operations on this client through the following functions.
+Каждый клиентский объект WS содержит некоторые функции (методы), которые могут быть выполнены. для определенного объекта `wsc` вы можете выполнять некоторые операции с помощью следующих функций.
 
-#### Create a Connection
+#### Подключиться
 
 `wsc.connect(target)`
 
-- Parameter: 
+- Параметры: 
   - target : `String`  
-    The destination address to connect to, in the form of `ws://hostname[:port][/path/path][?query=value]`
-- Return value: Whether the connection is successful.
-- Return value type: `Boolean` 
+    Адрес назначения в следущем формате `ws://hostname[:port][/path/path][?query=value]`.
+- Возвращаемое значение: Было ли подключение успешно.
+- Тип возвращаемого значения: `Boolean` 
 
 <br>
 
-#### Create a Connection Asynchronously
+#### Асинхронно подключиться
 
 `wsc.connectAsync(target,callback)`
 
-- Parameters: 
+- Параметры: 
   - target : `String`  
-    The destination address to connect to, in the form of `ws://hostname[:port][/path/path][?query=value]`
+    Адрес назначения в следущем формате `ws://hostname[:port][/path/path][?query=value]`.
   - callback : `Function`
-    A callback function to execute when the connection succeeds or fails.
-- Return value: Whether the connection attempt was started successfully or not.
-- Return value type: `Boolean` 
+    Функция обратного вызова, выполняется в случае выполнения (или не выполнения) подключения.
+- Возвращаемое значение: Была ли попытка подключиться успешна или нет.
+- Тип возвращаемого значения: `Boolean` 
 
-Note: The prototype of the callback function of the parameter callback: `function(success)`  
+Примечание. Прототип функции обратного вызова: `function(success)`  
 
 - success : `Boolean`    
-  Whether the WebSocket connection is successful 
+  Было ли подключение выполнено успешно
 
 <br>
 
@@ -126,7 +126,7 @@ Note: The prototype of the callback function of the parameter callback: `functio
 
 `wsc.send(msg)`
 
-- Parameter: 
+- Параметр: 
   - msg : `String` / `ByteBuffer`  
     Text/Binary data to send.
 - Return value: Whether it was sent successfully.
@@ -142,7 +142,7 @@ In the process of WS working, when a message is received or an error occurs, the
 
 `wsc.listen(event,callback)`
 
-- Parameters: 
+- Параметры: 
 
   - event : `String`  
     The name of the event to listen for (see the list of listening events below).
