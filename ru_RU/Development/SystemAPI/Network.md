@@ -1,4 +1,4 @@
-<!-- working -->
+<!-- translated -->
 
 ## 🌏 API веб интерфейса
 
@@ -55,7 +55,7 @@
 
 <br>
 
-## 🔌 API WebSocket клиент 
+## 🔌 API WebSocket клиента
 
 В LLSE, используйте "обьект WebSocket" для подключения и работы с клиентом WebSocket.
 
@@ -122,102 +122,101 @@
 
 <br>
 
-#### Send Text/Binary Messages
+#### Отправка текстовых/бинарных сообщений
 
 `wsc.send(msg)`
 
 - Параметр: 
   - msg : `String` / `ByteBuffer`  
-    Text/Binary data to send.
-- Return value: Whether it was sent successfully.
-- Return value type: `Boolean` 
+    Текст/бинарные данные для отправки
+- Возвращаемое значение: Были ли данные успешно отправлены.
+- Тип возвращаемого значения: `Boolean` 
 
-If the parameter type passed in is `String`, will be sent as text, if it is `ByteBuffer` will be sent as binary data.
+Если параметр предоставлен как `String`, он будет отправлен текстом, если же как `ByteBuffer` будет отпрвлен как бинарные данные.
 
 <br>
 
-#### Listen for WebSocket Events 
+#### Прослушка ивентов WebSocket 
 
-In the process of WS working, when a message is received or an error occurs, the relevant information needs to be processed. Here is the interface for listening to events.
-
+В процессе работы WS при получении сообщения или возникновении ошибки необходима обработка соответствующей информации. Вот интерфейс для прослушивания событий:
 `wsc.listen(event,callback)`
 
 - Параметры: 
 
   - event : `String`  
-    The name of the event to listen for (see the list of listening events below).
+    Название ивента для прослушки, список ивентов ниже.
 
   - callback : `Functon`  
-    Registered listener function (see below for function-related parameters)
-    When the specified event occurs, LLSE will call the listener function you gave and pass in the corresponding parameters.
-- Return value: Whether the event was successfully monitored.
-- Return value type: `Boolean` 
+    Регистрация функции прослушивания
+    Когда произойдет указанное событие, LLSE вызовет указанную вами функцию прослушивателя и передаст соответствующие параметры.
+- Возвращаемое значение: Был ли ивент успешно перехвачен.
+- Тип возвращаемого значения: `Boolean` 
 
 <br>
 
-#### List of Listening Events
+#### Список прослушивемых ивентов
 
-##### `"onTextReceived"` - Listen for string messages.
+##### `"onTextReceived"` - Ожидать доставления строки.
 
-- Listener function prototype
+- Прототип функции прослушки
   `function(msg)`
-- Parameter: 
+- Параметр: 
   - msg : `String`  
-    Received string message.
+    Доставленая строка.
 
-##### `"onBinaryReceived"` - Listen for binary messages.
+##### `"onBinaryReceived"` - Ожидать доставления бинарного сообщения.
 
-- Listener function prototype 
+- Прототип функции прослушки
   `function(data)`
-- Parameter: 
+- Параметр: 
   - data : `ByteBuffer`  
-    Received binary message.
+    Доставленое бинарное сообщение.
 
-##### `"onError"` - Listen for errors.
+##### `"onError"` - Ожидать ошибку.
 
-- Listener function prototype 
+- Прототип функции прослушки
   `function(msg)`
-- Parameter: 
+- Параметр: 
   - msg : `String`  
-    Error message.
+    Сообщение об ошибке.
 
-##### `"onLostConnection"` - Listen for lost connections.
+##### `"onLostConnection"` - Ожидать потери соединения.
 
-- Listener function prototype 
+- Прототип функции прослушки
   `function(code)`
-- Parameter: 
+- Параметр: 
   - code : `Integer`  
-    Error code.
+    Код ошибки.
 
 <br>
 
-#### Close the Connection
+#### Отключиться
 
 `wsc.close()`
 
-- Return value: Whether the connection was successfully closed.
-- Return value type: `Boolean` 
+- Возвращаемое значение: Whether the connection was successfully closed.
+- Тип возвращаемого значения: `Boolean` 
 
-Do not continue to use this client object while it is closed!
+Не продолжайте использовать этот клиентский объект, пока он отключен!
 
 <br>
 
-#### Force Disconnect
+#### Принудительно отключить
 
 `wsc.shutdown()`
 
-- Return value: Whether the connection was successfully disconnected.
-- Return value type: `Boolean` 
+- Возвращаемое значение: Whether the connection was successfully disconnected.
+- Тип возвращаемого значения: `Boolean` 
 
-Do not continue to use this client object while it is disconnected!
+Не продолжайте использовать этот клиентский объект, пока он отключен!
 
 <br>
 
-#### Get Error Code
+#### Получить код ошибки
 
 `wsc.errorCode()`
 
-- Return value: The error code generated by the last error.
-- Return value type: `Integer`
+- Возвращаемое значение: Код последней ошибки.
+- Тип возвращаемого значения: `Integer`
 
-If you encounter a failure in the use of the above interface, you can get the last error code from here.
+Если вы столкнулись с ошибкой при использовании вышеуказанного интерфейса, вы можете получить последний код ошибки отсюда.
