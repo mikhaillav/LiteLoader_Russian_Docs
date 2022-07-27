@@ -1,105 +1,114 @@
-## 📦 Database API
+<!-- translated -->
+<!-- by shishkevichd -->
 
-Database, generally used for plugins to persistently store data generated and processed by certain plugins.  
-Unlike configuration files, databases generally have no readability requirements, but have considerable considerations for performance and stability.  
-LLSE provides a consolidated database interface to accomplish this task.    
-In terms of specific implementation, the engine provides two different database formats: NoSQL database in key-value pair format, and SQL database in tabular format. You can use either as needed.
+## 📦 API базы данных
+*далее словосочетание `база данных` будет использоваться, как `БД`.*
+
+`БД` используется в плагинах для хранения огромного числа данных.
+
+В отличие от конфигурационных файлов, к `БД`, как правило, не предъявляются требования по читабельности, но при этом существенно учитываются производительность и стабильность.
+
+LLSE предоставляет интерфейс `БД` для взаимодействия с ним
+
+LLSE предоставляет несколько способов хранить данные: `NoSQL БД` (в формате ключ - значение) и `SQL БД` (в формате таблицы). Вы можете выбрать любой из этих способов
 
 <br>
 
-### 🔑 Key-Value NoSQL Database 
+### 🔑 NoSQL БД (ключ - значение)
 
-Key-value databases are suitable for storing data in key-value form, such as `name:apple`, `value:5` and many more. 
-This is accomplished with `leveldb`.
+`NoSQL БД` подходят для хранения данных в форме "ключ-значение", например "имя: яблоко", "значение: 5" и многих других.
+
+Это достигается с помощью `leveldb`.
 
 #### Create/Open a Key-Value Database
 
-Before using the database, you need to give a database path, the interface will open/create the specified database and return a database object.  
-A leveldb database is composed of multiple files, so you need to pass in the path of a folder where the database files will be stored.  
-If this directory already contains a database, it will be opened, otherwise a new one will be created.
+Перед использованием БД вам необходимо указать путь к БД, интерфейс откроет/создаст указанную БД и вернет его объект.
+БД leveldb состоит из нескольких файлов, поэтому вам необходимо указать путь к папке, в которой будут храниться файлы базы данных.
+Если в этом каталоге уже есть база данных, она будет открыта, иначе будет создана новая.
 
 [JS] `new KVDatabase(dir)`  
 [Lua] `KVDatabase(dir)`
 
-- Parameters: 
+- Параметры: 
   - dir : `String`  
-    The storage directory path of the database, based on the BDS root directory.
-- Return value: Open/created database objects
-- Return value type: `KVDatabase`
-  - If the return value is `Null`, it means the creation/opening failed 
+    Путь к каталогу хранения БД на основе корневого каталога BDS.
+- Возвращаемое значение: Объект БД
+- Тип возвращаемого значения: `KVDatabase`
+  - Если возращаемое значение `Null`, это значит, что открытие/создание БД не удался.
 
-When the given directory does not exist, it will try to automatically create the corresponding directory path layer by layer.
+Когда данный каталог не существует, он попытается автоматически создать новый каталог.
 
-After successfully opening the database, you can use the following interfaces to perform related operations.  
-For a database object `db`, with the following functions:
+После успешного открытия БД вы можете использовать следующие интерфейсы для выполнения связанных операций.
+Для объекта базы данных `db` со следующими функциями:
 
 <br>
 
-#### Write Data Item
+#### Записать ключ со значением
 
 `db.set(name,data)`
 
-- Parameters: 
+- Параметры: 
   - name : `String`  
-    Data item name
+    Ключ
   - data : `Any type`  
-    Data to write. The allowed data types are:    
+    Значение. Значением может быть такие типы, как:    
     `Integer` `Float` `String` `Boolean` `Array` `Object `  
     The above elements can only be nested inside an `Array` or an `Object`.
-- Return value: Whether the write is successful.
-- Return value type: `Boolean`
+- Возвращаемое значение: Была ли запись ключа со значением успешным
+- Тип возвращаемого значения: `Boolean`
 
 <br>
 
-#### Read Data Item
+#### Прочитать значение из ключа
 
 `db.get(name)`
 
-- Parameters: 
+- Параметры: 
   - name : `String`  
-    Data item name
-- Return value: The data of this item stored in the database.
-- Return value type: `Any type`, depending on the specific type of data stored.
-  - If the return value is `Null` it means that the data does not exist.
+    Ключ
+- Возвращаемое значение: Значение ключа
+- Тип возвращаемого значения: `Any type`, в зависимости от значения
+  - Если возращаемое значение `Null`, то это значит, что ключа нет в БД.
 
 <br>
 
-#### Delete Data Item
+#### Удалить ключ
 
 `db.delete(name)`
 
-- Parameters: 
+- Параметры: 
   - name : `String`  
-    Data item name
-- Return value: Whether the deletion was successfu.
-- Return value type: `Boolean`
+    Ключ
+- Возвращаемое значение: Было ли успешное удаления ключа из БД
+- Тип возвращаемого значения: `Boolean`
 
 <br>
 
-#### Get All Data Item Names 
+#### Получить все ключи и их значения
 
 `db.listKey()`
 
-- Return value: An array of all data item names.
-- Return value type: `Array`
+<!-- Требует понятного перевода -->
+- Возвращаемое значение: Массив со значениями.
+- Тип возвращаемого значения: `Array`
 
 <br>
 
-#### Close the Database
+#### Закрыть БД
 
 `db.close()`
 
-- Return value: Whether the shutdown was successful
-- Return value type: `Boolean`
+- Возвращаемое значение: Было ли закрытие БД успешным
+- Тип возвращаемого значения: `Boolean`
 
-After the database is closed, do not continue to use it!
+После закрытия БД, вы его не сможете использовать, пока заново не откроете.
 
 <br>
 
 ------
 
-### 📋 SQL Database
+### 📋 SQL БД
 
-SQL databases are suitable for processing large amounts of relational data using SQL statements. The bottom layer of the interface is implemented using a cross-database operation framework, which can connect to most of the commonly used SQL databases in the market.
+БД SQL подходят для обработки больших объемов данных с помощью языка SQL. Нижний уровень интерфейса реализован с использованием среды работы с несколькими базами данных, которая может подключаться к большинству широко используемых баз данных SQL, которые есть на данный момент.
 
 <br>
