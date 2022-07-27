@@ -1,385 +1,390 @@
-# LLSE - System Functional Interface Documentation
+<!-- translated -->
 
-> This provides an interface for connecting to **underlying system functions**, including operating the file system, accessing the network, etc.
+# LLSE - Документация по функциональному интерфейсу системы
 
-For plugin development, the realization of interoperability with the underlying interface of the system is an important extension, which greatly enhances the flexibility of plug-in development.
+> Предоставляет интерфейс для подключения к **основным системным функциям**, включая работу с файловой системой, доступ к сети и т. д.
 
-## 📝 Simple File Read and Write API
+Для разработки плагинов реализация взаимодействия с базовым интерфейсом системы является важным расширением, которое значительно повышает гибкость и мощность плагинов.
 
-The following APIs provide a simple interface for reading and writing files, which is convenient for occasional reading and writing of files. 
-LLSE uses the file class `File` to encapsulate file-related operations.
-If you need to manipulate files frequently, use the file classes below to improve performance.
+## 📝 Простое чтение/запись 
 
-> Note: All text-related operations use UTF-8 encoding.  
+Следующие API предоставляют простой интерфейс для чтения и записи файлов.
+LLSE использует файловый класс File для инкапсуляции операций, связанных с файлами.
+Если вам нужно часто манипулировать файлами, используйте приведенные ниже классы файлов для повышения производительности.
 
-### Read in All the Contents of the File
+> Примечание. Все операции с текстом используют кодировку UTF-8.
+
+### Прочитать все содержимое файла
 
 `File.readFrom(path)`
 
-- Parameter: 
+- Параметр: 
   - path : `String`  
-    The path of the target file, the relative path is based on the BDS root directory.
-- Return value: All data in the file
-- Return value type: `String`
-  - If the return value is `Null`, the read failed.
+    Путь до файла, относительно коревного каталога BDS.
+
+- Возвращаемое значение: Содержимое файла.
+- Тип возврщаемого значения: `String`.
+  - Если возвращаемое значение равняется `Null`, чтение не удалось.
 
 <br>
 
-### Write Content to the Specified File
+### Запись в файл
 
 `File.writeTo(path,text)`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
-    The path of the target file, the relative path is based on the BDS root directory.
+    Путь до файла, относительно коревного каталога BDS.
 
   - text : `String`  
-    What will be written to the file.
+    Что будет записано в файл.
 
-- Return value: Whether the write is successful or not.
+- Возвращаемое значение: Была ли запись успешна.
 
-- Return value type: `Boolean`
+- Тип возврщаемого значения: `Boolean`.
 
-> Note: If the file does not exist, it will be created automatically. If it exists, it will be **emptied** before writing.
+> Примечание. Если файл не существует, он будет создан автоматически. Если он существует, он будет **опустошен** перед записью.
 
 <br>
 
-### Append a Line to the Specified File
+### Добавить строку в файл
 
 `File.writeLine(path,text)`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
-    The path of the target file, the relative path is based on the BDS root directory.
+    Путь до файла, относительно коревного каталога BDS.
 
   - text : `String`  
-    What will be written to the file.
-- Return value: Whether the write is successful or not.
-- Return value type: `Boolean`
+    Что будет записано в файл.
+
+- Возвращаемое значение: Была ли запись успешна.
+- Тип возврщаемого значения: `Boolean`.
 
 <br>
 
-## 📋 File Object API
+## 📋 API Файлового обьекта
 
-In LLSE, "file objects" are used to manipulate and read and write to a particular file.
+В LLSE "файловые объекты" используются для управления, чтения и записи в файл.
 
-### Create a New File Object
+### Создание файлового обьекта
 
 [JS] `new File(path,mode[,isBinary])`  
 [Lua] `File(path,mode[,isBinary])`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
-    The path of the file you want to open 
+    Путь до файла который вы хотите открыть.
   - mode : `Enum`  
-    File open mode
+    Режим открытия файла.
   - isBinary : `Boolean`  
-    (optional parameter) whether to open the file in binary mode, the default is `false`  
-    In normal mode, during file reading and writing, newlines will be converted according to the local format. If you open the file in binary mode, indicating that the file is not in normal text format, these automatic conversions will not occur.
-- Return value: The open file object.
-- Return value type: `File`
-  - If the open fails, an exception will be thrown
+    (Опционлальный параметр) будет ли файл открыт в бинарном формате, по умолчанию `false`  
+    В обычном режиме при чтении и записи файла новые строки будут преобразованы в соответствии с локальным форматом. Если вы откроете файл в двоичном режиме, указав, что файл не в обычном текстовом формате, эти автоматические преобразования не произойдут.
+- Возвращаемое значение: Обьект Файла.
+- Тип возврщаемого значения: `File`
+  - Если открыть не удалось, будет выдано исключение
 
-The file opening mode has the following options:
+Режим открытия файла имеет следующие параметры:
 
-| Open Mode         | Meaning                                                |
-| ----------------- | ------------------------------------------------------ |
-| `file.ReadMode`   | Open file for reading                                  |
-| `file.WriteMode`  | Open and overwrite file, or create new file for writing|
-| `file.AppendMode` | Open and write at the end of the file |
+| Режим открытия    | Значение                         |
+| ----------------- | -------------------------------- |
+| `file.ReadMode`   | Открыть для чтения               |
+| `file.WriteMode`  | Открыть для записи               |
+| `file.AppendMode` | Открыть для записи в конец файла |
 
-When using `ReadMode` and `WriteMode`, you can use `seekTo` to manually move the file pointer position.
+При использовании `ReadMode` и `WriteMode`, вы можете использовать `seekTo` чтобы вручную переместить позицию курсора.
 
-> If the file with the given path exists, the existing file will be opened directly; if the file does not exist, a new file will be created automatically. If some directories in the opened path do not exist, the interface will automatically create directories.
+> Если файл с данным путем существует, существующий файл будет открыт напрямую. Если файл не существует, новый файл будет создан автоматически.Если некоторые каталоги в предоставленом пути не существуют, интерфейс автоматически создаст каталоги.
 
-After opening the file, you can use the interface of the file object described below to read and write the file. 
+После открытия файла вы можете использовать интерфейс объекта файла, описанного ниже для чтения и записи файла.
 
 <br>
 
 
-### File Object - Properties
+### Объект файла - свойства
 
-Every file object contains some fixed object properties. for a specific file object `fi`, has the following properties
+Каждый объект файла содержит некоторые свойства. Для конкретного объекта файла `fi` имеет следующие свойства
 
-| Attributes            | Meaning               | Data Types      |
-| --------------- | ------------------ | --------- |
-| fi.path         | Current File Path       | `String`  |
-| fi.absolutePath | Absolute current file path | `String`  |
-| fi.size         | Current file size       | `Integer` |
+| Атрибут            | Значение                | Тип       |
+| --------------- | -------------------------- | --------- |
+| fi.path         | Путь к файлу               | `String`  |
+| fi.absolutePath | Абсолютный путь к файлу    | `String`  |
+| fi.size         | Текущий размер файла       | `Integer` |
 
 These object properties are read-only and cannot be modified.
 
 <br>
 
-### File Object - Function
+### Обьект файла - функции
 
-Each file object contains some member functions (member methods) that can be executed. for a specific file object `fi`, you can perform some operations on this file through the following functions
+Каждый объект файла содержит некоторые функции (методы), которые могут быть выполнены. Для конкретного объекта `fi` вы можете выполнить некоторые операции в этом обьекте через следующие функции.
 
-#### Synchronous Read and Write 
+#### Синхронная запись и чтение
 
-When using the synchronous read/write interface, you need to pay attention. If the file is too large or the read and write content is too large, the consumption time is too long, which may cause the game to freeze.
-If there is not much content to read and write, use the synchronous interface to have a better development experience.
-If there is a lot of content, you can use the following asynchronous read and write interface.
+При использовании интерфейса синхронного чтения/записи вам необходимо обратить внимание на то, что если файл слишком большой или контент чтения и записи слишком велик, время обработки слишком длинное, что может привести к заморозке игры.
+Если для чтения и записи не так много контента, используйте синхронный интерфейс.
+Если необходимо обработать много контента, вы можете использовать следующий асинхронный интерфейс чтения и записи.
 
-##### Read Text/Binary Data From File
+##### Прочитать текст/банарные данные из файла
 
 `fi.readSync(cnt)`
 
-- Parameter: 
+- Параметр: 
   - cnt : `Number`  
-    Number of characters/bytes to read
-- Return value: read string content/binary data
-- Return value type: `String` / `ByteBuffer`
-  - If the return value is `Null`, the read failed.
+    Число символов/байтов для чтения
+- Возвращаемое значение: прочитаный текст/банарные данные.
+- Тип возврщаемого значения: `String` / `ByteBuffer`
+  - Если возвращаемое значение равняется `Null`, чтение файла не удалось.
 
-Start reading from the current file pointer. Returns if the file was opened in binary mode `ByteBuffer`, otherwise return `String`.
+Начните читать с текущего указателя файла. 
+Если файл был открыт в двоичном режиме, вернет `bytebuffer`, в противном случае вернет` string`.
 
 <br>
 
-##### Read a Line of Text From a File
+##### Прочитать строчку текста из файла
 
 `fi.readLineSync()`
 
-- Return value: Read String Content
-- Return value type: `String`
-  - If the return value is `Null`, the read failed.
+- Возвращаемое значение: Прочитаный контент.
+- Тип возврщаемого значения: `String`
+  - Если возвращаемое значение равняется `Null`, чтение файла не удалось.
 
-> Note that the newline at the end of the string should be handled by itself 
+> Обратите внимание, что новая линия в конце строки должна быть обработана сама по себе.
 
 <br>
 
-##### Read Everything From File
+##### Прочитать все содержимое файла
 
 `fi.readAllSync()`
 
-- Return value: Read string content/binary data
-- Return value type: `String` / `ByteBuffer`
-  - If the return value is `Null`, the read failed.
+- Возвращаемое значение: прочитаный текст/банарные данные.
+- Тип возврщаемого значения: `String` / `ByteBuffer`
+  - Если возвращаемое значение равняется `Null`, чтение файла не удалось.
 
-Reading starts at the current file pointer and continues until the end of the file. 
-Returns if the file was opened in binary mode `ByteBuffer`, otherwise return `String`.
+Чтение начинается с текущего указателя файла и продолжается до конца файла. 
+Если файл был открыт в двоичном режиме, вернет `bytebuffer`, в противном случае вернет` string`.
 
 <br>
 
-##### Write Text/Binary Data to File 
+##### Записать текст/банарные данные в файл
 
 `fi.writeSync(str)`
 
-- Parameter: 
+- Параметр: 
   - str : `String` / `ByteBuffer`  
-    The data that will be written
-- Return value: Whether the write succeeded or not.
-- Return value type: `Boolean`
+    Данные для записи
+- Возвращаемое значение: Была ли запись успешна.
+- Тип возврщаемого значения: `Boolean`
 
-If the file is opened in binary mode, the passed arguments will be written as binary bytes, otherwise they will be written as normal text.
+Если файл открыт в двоичном режиме, переданные аргументы будут записаны как бинарные данные, в противном случае они будут записаны как обычный текст.
 
 <br>
 
-##### Write a Line of Text to a File
+##### Записать строку текста в файл
 
 `fi.writeLineSync(str)`
 
-- Parameter: 
+- Параметр: 
   - str : `String`  
-    The `String` that will be written
-- Return value: Whether the write succeeded or not.
-- Return value type: `Boolean`
+    `String` для записи в файл
+- Возвращаемое значение: Была ли запись успешна.
+- Тип возврщаемого значения: `Boolean`
 
-When this function executes, it will automatically add a newline at the end of the string.
+При выполнении функции, она автоматически добавит новую линию в конце строки.
 
 <br>
 
-#### Asynchronous Read and Write
+#### Асинхронные чтение и запись
 
-When the amount of data is large and it takes a long time, it is recommended to use the asynchronous read/write interface to reduce the impact on the server.
+Когда объем данных велик, и это занимает много времени, рекомендуется использовать интерфейс асинхронного чтения/записи, чтобы уменьшить влияние на сервер.
 
-##### Read Text/Binary Data From File (Async)
+##### Чтения текста/двоичных данных из файла (асинхрон)
 
 `fi.read(cnt,callback)`
 
-- Parameter: 
+- Параметры: 
   - cnt : `Number`  
-    Number of characters/bytes to read
+    Количество символов/байтов для записи
   - callback : `Function`  
-    Callback function to get the result
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    Функция обратного вызова для получения результата
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возврщаемого значения: `Boolean`
 
-Note: The prototype of the callback function of the parameter callback: `function(result)`  
+Примечание. Прототип функции обратного вызова: `function (result)`
 
 - result : `String` / `ByteBuffer`  
-  read text/binary data  
-  If result is `Null` it means that the read failed 
+  прочитанные данные
+  Если результат равняется `null` это означает, что чтение не удалось.
 
-Start reading from the current file pointer. Returns if the file was opened in binary mode `ByteBuffer`, otherwise return `String`.
+Начните читать с текущего указателя файла. 
+Если файл был открыт в двоичном режиме, вернет `bytebuffer`, в противном случае вернет` string`.
 
 <br>
 
-##### Read a Line of Text From a File (Async)
+##### Прочитать линию текста из файла (асинхрон)
 
 `fi.readLine(callback)`
 
-- Parameter: 
+- Параметр: 
   - callback : `Function`  
-    Callback function to get the result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    Функция обратного вызова для получения результата
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возврщаемого значения: `Boolean`
 
-Note: The prototype of the callback function of the parameter callback:  `function(result)`  
+Примечание. Прототип функции обратного вызова: `function (result)`
 
 - result : `String`  
-  The text that was read from the file.
+  Прочитаные данные
 
-> Note that the newline at the end of the string should be handled by itself.
+> Обратите внимание, что новая линия в конце строки должна быть обработана сама по себе.
 
 <br>
 
-##### Read Everything From File (Async)
+##### Прочитать содержимое файла (асинхрон)
 
 `fi.readAll(callback)`
 
-- Parameter: 
+- Параметр: 
   - callback : `Function`  
-    Callback function to get the result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    Функция обратного вызова для получения результата
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возврщаемого значения: `Boolean`
 
-Note: The prototype of the callback function of the parameter callback:  `function(result)`  
+Примечание. Прототип функции обратного вызова: `function (result)`
 
 - result : `String` / `ByteBuffer`  
-  Text/Binary data read from the file.  
-  If result is `Null` it means that the read failed.
+  Текст/бинарные данные из файла  
+  Если результат равняется `null` это означает, что чтение не удалось.
 
-Reading starts at the current file pointer and continues until the end of the file. 
-Returns if the file was opened in binary mode `ByteBuffer`, otherwise return `String`.
+Начните читать с текущего указателя файла. 
+Если файл был открыт в двоичном режиме, вернет `bytebuffer`, в противном случае вернет` string`.
 
 <br>
 
-##### Write Text/Binary Data to File (Async)
+##### Напишите текст/двоичные данные в файл (асинхрон)
 
 `fi.write(str[,callback])`
 
-- Parameter: 
+- Параметр: 
   - str : `String` / `ByteBuffer`  
     The data that will be written.
   - callback : `Function`  
-    (optional parameter) Callback function to get the result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    (Опциональный параметр) Функция обратного вызова для получения результата.
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возврщаемого значения: `Boolean`
 
 If the file is opened in binary mode, pass in a `ByteBuffer`, otherwise you need to pass in `String`.
 
-Note: The prototype of the callback function of the parameter callback:  `function(result)`  
+Примечание. Прототип функции обратного вызова: `function (result)`
 
 - result : `Boolean`  
-  Whether the write is successful.
+  Была ли запись успешна.
 
 <br>
 
-##### Write a Line of Text to a File (Async)
+##### Запись строки в файл (асинхрон)
 
 `fi.writeLine(str[,callback])`
 
-- Parameter: 
+- Параметры: 
   - str : `String`  
-    The data that will be written
+    Данные для записи
   - callback : `Function`  
-    (optional parameter) Callback function to get the result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    (Опциональный параметр) Функция обратного вызова для получения результата.
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возврщаемого значения: `Boolean`
 
-Note: The prototype of the callback function of the parameter callback:  `function(result)`  
+Примечание. Прототип функции обратного вызова: `function (result)`
 
 - result : `Boolean`  
-  Whether the write is successful.
+  Была ли запись успешна.
 
-> When this function executes, it will automatically add a newline at the end of the string.
+> Когда эта функция выполняется, она автоматически добавит новую линию в конце строки.
 
 <br>
 
-#### Other Common Interfaces  
+#### Другие интерфейсы
 
-In addition to the above-mentioned read and write interfaces, other general interfaces for manipulating file objects are also provided here.
+В дополнение к вышеупомянутым интерфейсам чтения и записи, здесь также предоставляются другие общие интерфейсы для манипулирования объектами файла.
 
-##### Move the File Pointer 
+##### Переместить курсора файла
 
 `fi.seekTo(pos,isRelative)`
 
-- Parameter: 
+- Параметры: 
   - pos : `Number`  
-    The position to move the file pointer to.
+    Позиция для перемещения курсора
   - isRelative : `Boolean`  
-    Whether it is moving relative to the current file pointer position.
-- Return value: Whether the move was successful.
-- Return value type: `Boolean`
+    Перемещается ли он относительно текущей позиции указателя файла.
+- Возвращаемое значение: Было ли перемещение успешно.
+- Тип возврщаемого значения: `Boolean`
 
-If isRelative is `true`pos means moving relative to the current position, a positive number means moving backward, and a negative number means moving forward.  
-If isRelative is `false`, pos means move relative to the beginning of the file, which is `0` or a positive number. If `-1`, which means move to the end of the file.
+Если isRelative имеет значение `true`, pos означает перемещение относительно текущей позиции, положительное число означает движение назад, а отрицательное число означает движение вперед.
+Если isRelative равно `false`, pos означает перемещение относительно начала файла, что равно `0` или положительному числу. Если `-1`, это означает переход в конец файла.
 
 <br>
 
-##### Set File Size
+##### Установить размер файла
 
 `fi.setSize(size)`
 
-- Parameter: 
+- Параметр: 
   - size : `Number`  
-    The size the file will be set to.
-- Return value: Whether the setting was successful.
-- Return value type: `Boolean`
+    Размер файла для установки
+- Возвращаемое значение: Была ли настройка успешна.
+- Тип возврщаемого значения: `Boolean`
 
-The new size can be set larger than the current size of the file.
-If the new size set is smaller than the current size of the file, the original file will be truncated.
+Новый размер может быть установлен больше, чем текущий размер файла.
+Если набор нового размера меньше текущего размера файла, исходный файл будет урезан.
 
 <br>
 
-##### Close File
+##### Закрыть файл
 
 `fi.close()`
 
-- Return value: Whether closing the file was successful.
-- Return value type: `Boolean`
+- Возвращаемое значение: Было ли закрытие успешно.
+- Тип возврщаемого значения: `Boolean`
 
-Once the file is closed, it cannot be used until it is opened again.
-
+Как только файл будет закрыт, его нельзя использовать, пока он не будет открыт снова.
 <br>
 
-##### Whether the File Pointer Is at the End of the File 
+##### Находится ли курсор файла в конце файла
 
 `fi.isEOF()`
 
-- Return value: Whether the file pointer is at the end of the file.
-- Return value type: `Boolean`
+- Возвращаемое значение: Находится ли курсор в конце файла.
+- Тип возврщаемого значения: `Boolean`
 
 <br>
 
-##### Flush File Buffer 
+##### Обновить файловый буфер
 
 `fi.flush()`
 
-- Return value: Whether the refresh was successful.
-- Return value type: `Boolean`
+- Возвращаемое значение: Было ли обновление успешным.
+- Тип возврщаемого значения: `Boolean`
 
 <br>
 
-##### Get Error Code 
+##### Получить код ошибки
 
 `fi.errorCode()`
 
-- Return value: the error code generated by the last IO operation.
-- Return value type: `Integer`
+- Возвращаемое значение: Последний код ошибки.
+- Тип возврщаемого значения: `Integer`
 
-If you encounter a failure in the use of the above interface, you can get the last error code from here.
+Если вы столкнетесь с проблемами при использовании вышеуказанного интерфейса, вы можете получить последний код ошибки здесь.
 
 <br>
 
-##### Clear Error Status
+##### Отчистить код ошибки
 
 `fi.clear()`
 
-- Return value: whether the error was cleared successfully
-- Return value type: `Boolean`
+- Возвращаемое значение: Было ли удаление ошибки успешным.
+- Тип возврщаемого значения: `Boolean`
 
-If a failure is encountered in the use of the above interface, after obtaining the error code, use this function to clear the error state to continue to use the file object normally.
+Если при использовании вышеуказанного интерфейса возникли ошибки, после получения кода ошибки используйте эту функцию, чтобы очистить состояние ошибки и продолжить нормально использование объекта файла.
 
 <br>
