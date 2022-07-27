@@ -91,7 +91,7 @@
 #### 20210713 - v 0.0.7
 
 - `lxl.getVerion` возвращаемое значение стало `Object`.
-- The `pl.sendSimpleForm` function adds an `images` parameter.
+- В функцию `pl.sendSimpleForm` добавлен параметр `images`.
 
 #### 20210709 - v 0.0.7
 
