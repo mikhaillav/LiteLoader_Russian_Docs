@@ -1,4 +1,4 @@
-<!-- working -->
+<!-- translated -->
 # LLSE - Документация Вспомогательного Интерфейса
 
 > Большое колличество **вспомогательных функций** предоставлены здесь, включая функции логирования, интерфейсы функций загрузчика и т.д.
@@ -89,66 +89,66 @@
 
  ### Функция вывода Логов
 
-After the setup is complete, you can use the function here to output the log.
+После завершения настройки вы можете использовать эту функцию для вывода лога.
 
-`logger.log(data1,data2,...)` -> Output normal text  
-`logger.debug(data1,data2,...)` -> Output debugging information  
-`logger.info(data1,data2,...)`  -> Output prompt information  
-`logger.warn(data1,data2,...)`  -> Output warning message  
-`logger.error(data1,data2,...)`  -> Output error messages  
-`logger.fatal(data1,data2,...)`  -> Output critical error message
+`logger.log(data1,data2,...)` -> Вывести обычный текст
+`logger.debug(data1,data2,...)` -> Вывести информацию отладки
+`logger.info(data1,data2,...)`  -> Вывести общую информацию 
+`logger.warn(data1,data2,...)`  -> Вывести предупреждения
+`logger.error(data1,data2,...)`  -> Вывести сообщения об ошибках
+`logger.fatal(data1,data2,...)`  -> Вывести сообщения об критических ошибках
 
-- Parameter:
-  - Variable or data to be output  
-    Can be of any type, and the number of parameters can be any number.
-- Return value: none 
+- Параметр:
+  - Переменная или данные для вывода  
+    Может быть любого типа, и количество параметров может быть любым.
+- Возвращаемое значение: нету
 
-Among them, **ordinary text** will be output as it is when output, while other output interfaces will append the **current time and log type.**
-For example: you call `logger.error("Fail to transport the player")`  
-The result of the log output is: 
+Среди них **обычный текст** будет выводиться таким, какой он есть при выводе, в то время как другие интерфейсы вывода будут добавлять **текущее время и тип лога.**
+Например вы используете `logger.error('Не удалось телепортировать игрока')`
+В консоли вы получите:
 
 ```
-[2021-05-21 19:41:03 Error] Fail to transport the player
+[2077-07-07 07:07:07 Error] Не удалось телепортировать игрока
 ```
 
 <br>
 
-### Other Settings
+### Другие настройки
 
-In addition, there are other settings to change the format of the output log 
+Кроме того, есть другие настройки для изменения формата выводимого лога. 
 
-#### Set custom log message headers  
+#### Установить пользовательские заголовки логов
 
 `logger.setTitle(title)`
 
-- Parameter:
+- Параметр:
   - title : `String`  
-    Set custom headers
-- Return value: none 
+    Установить пользовательский заголовок
+- Возвращаемое значение: нету
 
-"Header" is the text at the beginning of the log output entry, which is used to visually distinguish the output source of the log. 
-By default, message headers are empty by default, i.e. output without headers. 
+«Заголовок» — это текст в начале записи выводимого лога, который используется для визуального определения источника выводимого лога.
+По умолчанию заголовки сообщений пусты, т.е. сообщения выводятся без заголовков
 
-For example: set a custom header as `logger.setTitle("LiteLoader")`  
-Then the following log output will become like: 
+Например: установим пользовательский заголовок `logger.setTitle("LiteLoader")`  
+В консоли мы получим: 
 
 ```
-20:05:26 ERROR [LiteLoader] Fail to transport the player
+07:07:07 ERROR [LiteLoader] Не удалось телепортировать игрока
 ```
 
-If you want to turn off the header after setting it, do `logger.setTitle("")`
+Если вы хотите отключить заголовок после его установки, используйте `logger.setTitle("")`
 
 <br>
 
-#### Unified modification log output level
+#### Унифицированный уровень вывода лога
 
 `logger.setLogLevel(level)`
 
-- Parameter:
+- Параметр:
   - level : `Integer`  
-    Log output level    
-- Return value: none 
+    Устанавливаемый уровень вывода лога
+- Возвращаемое значение: нету
 
-Unified reset of log output levels for various output directions 
+Унифицированный сброс уровней вывода лога
 
 <br>
