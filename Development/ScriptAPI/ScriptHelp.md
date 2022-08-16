@@ -1,157 +1,160 @@
-# LLSE - Generic Scripting Interface Documentation
+<!-- translated -->
 
-> Here are some commonly used **auxiliary functions** , such as plugin registration, output information and asynchronous interfaces, etc.
+# LLSE - Основная документация по основному скриптовому интерфейсу
 
-They make it easier and more natural for you to develop scripts and avoid a lot of unnecessary details.
+> Вот некоторые обычно используемые **вспомогательные функции**, такие как регистрация плагина, логирование, асинхронные интерфейсы и т.д.
 
-## 🎯 Plugin Registration API 
+Они делают процесс разработки более простым и удобным, и позволяют избегать множества ненужных действий.
 
-Before you start writing code for your plugin, you first need to provide the loader with some plugin-related information.
+## 🎯 API регистрации плагина
+
+Прежде, чем начать писать код для своего плагина, вам сначала необходимо предоставить загрузчику некоторую информацию связанную с плагином.
 
 `ll.registerPlugin(name, introduction, version, otherInformation)`
 
-- Parameters: 
+- Параметру: 
 
   - name : `String`  
-    Plugin Name
+    Название плагина.
   - introduction : `String`  
-    A short description of the plugin.
+    Небольшое описание плагина.
   - version : `Array<Integer,Integer,Integer>`  
-    Plugin version information.
+    Версия плагина
   - other : `Object<string,string>`  
-    Other additional information you are willing to provide (such as license, open source address, etc.)
+    Дополнительная информация, такие как лицензия, ссылка на исходники и другое.
 
-Among them, version version information is an array of version number numbers, such as `[2,0,1]` indicates that the version number is 2.0.1  
-If you do not pass in valid version information, the version number of the plugin will be set to the default value `1.0.0`
+Среди них информация о версии представляет собой массив номеров номеров версий, например `[2,0,1]` указывает, что номер версии равен 2.0.1.
+Если вы не передадите действительную информацию о версии, для номера версии плагина будет установлено значение по умолчанию «1.0.0».
 
-For plugin additional information, you can pass in any information you need to inform the user in the same format as `Object` key-value pair. The specific data of the key-value pair needs to be `String` format.
+Для дополнительной информации о плагине вы можете передать любую информацию, необходимую для информирования пользователя, в том же формате, что и пара ключ-значение `Object`. Конкретные данные пары ключ-значение должны иметь формат `String`.
 
 <br>
 
-## 💼 Script Assist API
+## 💼 Скриптовый помощник
 
-The following APIs add necessary auxiliary interfaces to scripts.
+Следующие API добавляют в скрипты необходимые вспомогательные интерфейсы.
 
-### Output Information To The Console
+### Вывод информации в консоль
 
 `log(data1,data2,...)`  
 
-- Parameter:.,
-  - Variable or data to be output  
-    Can be of any type, and the number of parameters can be any number.
-- Return value: none
+- Параметр:
+  - data1,data2...:
+    Данные для вывода, могут быть любым значением/типом.
+- Возвращаемое значение: нету
 
 <br>
 
-### Output Color Text
+### Цветной вывод информации в консоль
 
-This is an upgraded version of the above function; it supports color output.
+Это обновленная версия вышеуказанной функции. Она поддерживает цветовой вывод.
 
 `colorLog(color,data1,data2,...)`
 
-- Parameter: 
+- Параметр: 
   - color : `String`  
-    The color output by this line (code example and effect are as follows)
-  - data... : 
-     Variable or data to be output  
-    Can be of any type, and the number of parameters can be any number.
-- Return value: none   
+    Название цвета
+  - data1,data2...: 
+      Данные для вывода, могут быть любым значением/типом.
+- Возвращаемое значение: нету
 
-#### Show results: 
+#### Пример результатов: 
 
-![ColorLogExample](/en_US/ScriptHelp.assets/colorLog.png)
+![Пример цветного лога](/assets/colorLog.png)
 
 <br>
 
-### Asynchronous Output
+### Асинхронный вывод
 
-This function returns immediately after the output request is sent, avoiding the blocking time caused by synchronous reading and writing.
-The bottom layer has lock protection, different `fastLog` There will be no string phenomenon between.
+Эта функция возвращается сразу после отправки запроса на вывод, избегая времени блокировки, вызванного синхронным чтением и записью.
+Нижний слой имеет защиту от блокировки, другой `fastLog`. Между ними не будет явления строки.
 
 `fastLog(data1,data2,...)`
 
-- Parameter: 
-  - data... : 
-    Variable or data to be output
-    Can be of any type, and the number of parameters can be any number 
-- Return value: none 
+- Параметры: 
+  - data1,data2...: 
+    Данные для вывода, могут быть любым значением/типом.
+- Возвращаемое значение: нету 
 
 <br>
 
-### Delay the execution of a function for a period of time 
+### Задержать выполнение функции на определенное время
 
 `setTimeout(func,msec)`
 
-- Parameter: 
+- Параметры: 
 
   - func : `Function`  
-    The function to be executed.
+    Функция для выполнения
 
   - msec : `Integer`  
-    Delay execution time (milliseconds)
-- Return value: this task id.
-- Return value type: `Integer`
-  - If it returns `Null`, the task failed.
+    Задержка (милисекунды)
+- Возвращаемое значение: айди задачи.
+- Тип возвращаемого значения: `Integer`
+  - Если вернет `Null`, создать задачу не удалось.
 
 <br>
 
-### Delay the execution of a code segment for a period of time (eval)
+### Задержка выполнения сегмента кода на период времени (Eval)
 
 `setTimeout(code,msec)`
 
-- Parameter: 
+- Параметры: 
 
   - code : `String`  
-    The code segment to be executed.
+    Сегмент кода для выполнения.
 
   - msec : `Integer`  
-    Delay execution time (milliseconds) 
-- Return value: this task id 
-- Return value type: `Integer`
-  - If it returns `Null`, the task creation failed.
+    Задержка (милисекунды)
+- Возвращаемое значение: айди задачи.
+- Тип возвращаемого значения: `Integer`
+  - Если вернет `Null`, создать задачу не удалось.
 
 <br>
 
-### Set period execution function
+### Задать переодичность выполнения функции
 
 `setInterval(func,msec)`
 
-- Parameter: 
+- Параметры: 
+
   - func : `Function`  
-    The function to be executed
+    Функция для выполнения
 
   - msec : `Integer`  
-    Execution interval period (ms)
-- Return value: this task id
-- Return value type:  `Integer`
+    Переодичность (милисекунды)
+- Возвращаемое значение: айди задачи.
+- Тип возвращаемого значения: `Integer`
+  - Если вернет `Null`, создать задачу не удалось.
 
 <br>
 
-### Set period execution code segment (eval)
+### Задать переодичность выполнения сегмента кода
 
 `setInterval(code,msec)`
 
-- Parameter: 
-  - code : `String`  
-    The code to be executed.
+- Параметры: 
+
+  - code : `Function`  
+    Сегмент кода для выполнения
 
   - msec : `Integer`  
-    Execution interval period (ms) 
-- Return value: this task id 
-- Return value type:  `Integer`
-  - If it returns `Null`, the task creation failed.
+    Переодичность (милисекунды)
+- Возвращаемое значение: айди задачи.
+- Тип возвращаемого значения: `Integer`
+  - Если вернет `Null`, создать задачу не удалось.
 
 <br>
 
-### Cancel Delay/Period Execution Item 
+### Отменить передочиность задачи
 
 `clearInterval(taskid)`
 
-- Parameter: 
-  - timerid : `Integer`  
-    The task ID returned by the first few functions
-- Return value: whether the cancellation was successful.
-- Return value type:  `Boolean`
-  - If it returns `Null`, the cancellation of the task failed.
+- Параметр: 
+  - taskid : `Integer`  
+    Айди задачи
+- Возвращаемое значение: была ли отмена задачи успешна.
+- Тип возвращаемного значения:  `Boolean`
+  - Если вернуло `Null`, отмена не удалась.
 
 <br>

@@ -1,154 +1,154 @@
-# LLSE - Script Assist Interface Documentation
+<!-- translated -->
+# LLSE - Документация Вспомогательного Интерфейса
 
-> A large number of **helper functions** are provided here, including log functions, loader function interfaces, and more.
+> Большое колличество **вспомогательных функций** предоставлены здесь, включая функции логирования, интерфейсы функций загрузчика и т.д.
 
-They make it easier and more natural for you to develop scripts and avoid a lot of unnecessary details.
+Они делают более простой и естественной для вас разработку скриптовых плагинов, а так-же помогают избегать ненужные детали
 
-## 📅 Generic logging API 
+## 📅 Общее API логгера
 
-In the past, it was a very troublesome thing to output logs in a certain format to a specified location. 
-Today, LLSE provides you with a convenient generic logging interface. 
+В прошлом вывод логов в опледелённом формате и в указанное место был трудным.
+Сегодня же LLSE предоставляет вам удобный общий интерфейс логирования.
 
-### Concept: About log output levels
+### Концепция: о уровнях вывода логов
 
-In order to rank the priority and importance of logs, we introduce the concept of **log output level**.
-The higher the log output level, the more detailed the content of the log, but the larger the amount of logs output at the same time. 
-See the table below for details: 
+Чтобы оценить приоритет и важность логов, мы ввели концепцию **уровня вывода лога**.
+Чем выше уровень вывода лога, тем более подробное содержание лога, но и больше объем информации выводимой в лог.
+См. Таблицу ниже для получения более подробной информации:
 
-| Log Output Level | Log Severity | Log Description                         |
-| ------------ | ------------ | ------------------------------------------- |
-| 0            | Slient       | No log output.                              |
-| 1            | Fatal        | Only critical error messages.               |
-| 2            | Error        | Only error and critical error messages.     |
-| 3            | Warn         | Output arnings, errors, critical errors.    |
-| 4            | Info         | Output everythng except debug info.         |
-| 5            | Debug        | Output everything. |
+| Уровень Вывода Лога | Важность Лога | Описание Лога                                       |
+| ------------------- | ------------- | --------------------------------------------------- |
+| 0                   | Slient        | Нет вывода лога.                                    |
+| 1                   | Fatal         | Только сообщения о критических ошибках.             |
+| 2                   | Error         | Только ошибки и критические ошибки.                 |
+| 3                   | Warn          | Только предупреждения, ошибки и критические ошибки. |
+| 4                   | Info          | Всё, кроме отладочной информации.                   |
+| 5                   | Debug         | Вся информация.                                     |
 
-With the **Log output level** setting, you can easily filter out some unnecessary information in the production environment.
+С настройкой **уровня вывода лога** вы можете легко отфильтровать ненужную информацию в рабочей среде.
 
-The default value of the log output level is `4`, that is, all kinds of logs other than debug information will be output. 
-With some APIs given below, you can adjust the log output level to your own desired value. 
+Значение уровня вывода лога по умолчанию составляет `4`, то есть все виды сообщений, кроме информации отладки.
+С некоторыми API, приведенными ниже, вы можете настроить уровень вывода лога до желаемого значения.
 
 <br>
 
-### Set Output Configuration
+### Установка Конфигурации Вывода
 
-Before using the general log interface, you need to modify some configuration settings of the log output according to your needs.
+Перед использованием общего интерфейса логирования вам необходимо изменить некоторые настройки конфигурации вывода лога в соответствии с вашими потребностями.
+Вы можете свободно выбрать отправку журнала в консоль, файл или даже игроку, изменяя настройки.
+Например, эти настройки могут существовать одновременно, вы можете отправить лог в консоль и файл одновременно.
+Если вы не измените настройки, по **по умолчанию** лог будет выходиться только в консоль.
 
-You can freely choose to send the log to the console, file or even a player by modifying the settings.
-These settings can exist at the same time, for example, you can set to send to the console and file at the same time.
-If you don't change any settings, by **default** the log will only be output to the console. 
-
-#### Set whether the log is output to the console
+#### Установить вывод лога в консоль
 
 `logger.setConsole(isOpen[,logLevel])`
 
-- Parameter:
+- Параметр:
   - isOpen : `Boolean`  
-    Set whether the log is output to the console
-    The switch is on by default.  
+    Установите, будет ли выводиться лог в консоль.
+    По умолчанию лог будет выводиться в консоль.  
   - logLevel : `Integer`  
-    (optional parameter) the log output level of the console, the default is `4` 
-- Return value: none 
+    (опциональный параметр) уровень вывода лога в консоль, по умолчанию `4` 
+- Возвращаемое значение: нету 
 
 <br>
 
-#### Set whether the log is output to a file
+#### Установить вывод лога в файл
 
 `logger.setFile(filepath[,logLevel])`
 
-- Parameter:
+- Параметр:
   - filepath : `String`  
-    Set the file path where logs are output. 
-    If you pass in an empty string or `Null`, then output to a file is closed.
-    The switch is off by default.
+    Установить путь к файлу, куда будет выводиться лог.. 
+    Если строка пуста, или значение `Null`, то лог в файл выводиться не будет.
+    По умолчанию лог в файл выводиться не будет.
   - logLevel : `Integer`  
-    (optional parameter) the minimum log output level of the file, the default is `4` 
-- Return value: none 
+    (опциональный параметр) уровень вывода лога в консоль, по умолчанию `4`  
+- Возвращаемое значение: нету 
 
-If you want to output to a file, we recommend that you output the log uniformly to `BDS_Root_Directory/logs/` folder for easy organization and inspection.
+Если вы хотите вывести лог в файл, то мы рекомендуем выводить его в папку `корневая_папка_сервера/logs/` для лёгкой организации и проверки.
 
 <br>
 
-#### Set whether the log is output to a certain player
+#### Установить вывод лога игроку
 
 `logger.setPlayer(player[,logLevel])`
 
-- Parameter:
+- Параметр:
   - player : `Player`  
-    Set the target player object for sending logging output.
-    If it returns `Null`, output to the player is closed.
-    The switch is off by default
+    Установить объект игрока, которому будет выводиться лог.
+    Если возвращаемое значение `Null`, вывод лога игроку будет прекращён.
+    По умолчанию лог игроку выводиться не будет.
   - logLevel : `Integer`  
-    (optional parameter) The player's minimum log output level, defaults to `4`    
-- Return value: none 
+    (опциональный параметр) уровень вывода лога в консоль, по умолчанию `4`  
+- Возвращаемое значение: нету  
 
-This is a function designed to facilitate in-game debugging. The log output to the player will be treated as a chat message and displayed on the target player's screen.
-
-<br>
-
- ### Output Log Function
-
-After the setup is complete, you can use the function here to output the log.
-
-`logger.log(data1,data2,...)` -> Output normal text  
-`logger.debug(data1,data2,...)` -> Output debugging information  
-`logger.info(data1,data2,...)`  -> Output prompt information  
-`logger.warn(data1,data2,...)`  -> Output warning message  
-`logger.error(data1,data2,...)`  -> Output error messages  
-`logger.fatal(data1,data2,...)`  -> Output critical error message
-
-- Parameter:
-  - Variable or data to be output  
-    Can be of any type, and the number of parameters can be any number.
-- Return value: none 
-
-Among them, **ordinary text** will be output as it is when output, while other output interfaces will append the **current time and log type.**
-For example: you call `logger.error("Fail to transport the player")`  
-The result of the log output is: 
-
-```
-[2021-05-21 19:41:03 Error] Fail to transport the player
-```
+Эта функция разработана для облегчения отладки плагинов. Она выводит лог прямо игроку.
 
 <br>
 
-### Other Settings
+ ### Функция вывода Логов
 
-In addition, there are other settings to change the format of the output log 
+После завершения настройки вы можете использовать эту функцию для вывода лога.
 
-#### Set custom log message headers  
+`logger.log(data1,data2,...)` -> Вывести обычный текст
+`logger.debug(data1,data2,...)` -> Вывести информацию отладки
+`logger.info(data1,data2,...)`  -> Вывести общую информацию 
+`logger.warn(data1,data2,...)`  -> Вывести предупреждения
+`logger.error(data1,data2,...)`  -> Вывести сообщения об ошибках
+`logger.fatal(data1,data2,...)`  -> Вывести сообщения об критических ошибках
+
+- Параметр:
+  - Переменная или данные для вывода  
+    Может быть любого типа, и количество параметров может быть любым.
+- Возвращаемое значение: нету
+
+Среди них **обычный текст** будет выводиться таким, какой он есть при выводе, в то время как другие интерфейсы вывода будут добавлять **текущее время и тип лога.**
+Например вы используете `logger.error('Не удалось телепортировать игрока')`
+В консоли вы получите:
+
+```
+[2077-07-07 07:07:07 Error] Не удалось телепортировать игрока
+```
+
+<br>
+
+### Другие настройки
+
+Кроме того, есть другие настройки для изменения формата выводимого лога. 
+
+#### Установить пользовательские заголовки логов
 
 `logger.setTitle(title)`
 
-- Parameter:
+- Параметр:
   - title : `String`  
-    Set custom headers
-- Return value: none 
+    Установить пользовательский заголовок
+- Возвращаемое значение: нету
 
-"Header" is the text at the beginning of the log output entry, which is used to visually distinguish the output source of the log. 
-By default, message headers are empty by default, i.e. output without headers. 
+«Заголовок» — это текст в начале записи выводимого лога, который используется для визуального определения источника выводимого лога.
+По умолчанию заголовки сообщений пусты, т.е. сообщения выводятся без заголовков
 
-For example: set a custom header as `logger.setTitle("LiteLoader")`  
-Then the following log output will become like: 
+Например: установим пользовательский заголовок `logger.setTitle("LiteLoader")`  
+В консоли мы получим: 
 
 ```
-20:05:26 ERROR [LiteLoader] Fail to transport the player
+07:07:07 ERROR [LiteLoader] Не удалось телепортировать игрока
 ```
 
-If you want to turn off the header after setting it, do `logger.setTitle("")`
+Если вы хотите отключить заголовок после его установки, используйте `logger.setTitle("")`
 
 <br>
 
-#### Unified modification log output level
+#### Унифицированный уровень вывода лога
 
 `logger.setLogLevel(level)`
 
-- Parameter:
+- Параметр:
   - level : `Integer`  
-    Log output level    
-- Return value: none 
+    Устанавливаемый уровень вывода лога
+- Возвращаемое значение: нету
 
-Unified reset of log output levels for various output directions 
+Унифицированный сброс уровней вывода лога
 
 <br>

@@ -1,130 +1,135 @@
-## 📂 Directory and File API 
+<!-- translated -->
+<!-- by shishkevichd -->
 
-The following APIs provide interfaces for manipulating files, directories, etc. to interact with the file system.
+## 📂 API файлов и каталогов
 
-> Note: The relative paths of all incoming functions are based on the BDS root directory 
+Следующие API предоставляют интерфейсы для управления файлами, каталогами и т. д. для взаимодействия с файловой системой.
 
-### Create Folder   
+<!-- требует другого, понятного перевода -->
+<!-- исходный текст: Note: The relative paths of all incoming functions are based on the BDS root directory  -->
+> Примечание: Путь до файлов/каталогов основаны на корневом каталоге Bedrock Dedicated Server.
+
+### Создание нового каталога  
 
 `File.createDir(dir)`  
 `File.mkdir(dir)`
 
-- Parameter: 
+- Параметры: 
   - dir : `String`  
-    The path to the destination folder.  
-    Multiple folders can be created directly, no need to create one at a time. 
-- Return value: Whether the folder or folders were created successfully.
-- Return value type: `Boolean`
+    Путь к папке назначения.
+    Несколько папок могут быть созданы напрямую, нет необходимости создавать по одной за раз. 
+- Возращаемое значение: Была ли папка, или папки успешно созданы.
+- Тип возращаемого значения: `Boolean`
 
 <br>
 
-### Delete File/Folder  
+### Удаление файла/каталога  
 
 `File.delete(path)`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
-    Path to target file/folder
-- Return value: Whether the deletion was successful.
-- Return value type: `Boolean`
+    Путь к требуемому файлу/каталогу
+- Возращаемое значение: Было ли удаление успешным.
+- Тип возращаемого значения: `Boolean`
 
 <br>
 
-### Check if a File/Folder Exists
+### Проверка на наличие файла/каталога
 
 `File.exists(path)`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
-    Path to target file/folder.
-- Return value: Whether the target exists.
-- Return value type: `Boolean`
+    Путь к требуемому файлу/каталогу
+- Возращаемое значение: Существует ли файл/каталог.
+- Тип возращаемого значения: `Boolean`
 
 <br>
 
-### Copy Files/Folders to Specified Location 
+### Копирование файла/каталога в другое место
 
 `File.copy(from,to)`
 
-- Parameters: 
+- Параметры: 
   - from : `String`  
-    Path to source file/folder.
+    Путь к исходному файлу/каталогу.
 
   - to : `String`  
-    The location of the target file/folder.
-- Return value: Whether the copy is successful.
-- Return value type: `Boolean`
+    Расположение целевого файла/каталога.
+- Возращаемое значение: Успешна ли операция копирования.
+- Тип возращаемого значения: `Boolean`
 
 <br>
 
-### Move File/Folder to Specified Location  
+### Переместить файл/каталог в указанное место  
 
 `File.move(from,to)`
 
-- Parameters: 
+- Параметры: 
   - from : `String`  
-    Path to source file/folder.
+    Путь к исходному файлу/каталогу
 
   - to : `String`  
-    The location of the target file/folder.
-- Return value: Whether the copy is successful.
-- Return value type: `Boolean`
+    Локация требуемого файла/каталога
+- Возращаемое значение: Успешна ли операция копирования.
+- Тип возращаемого значения: `Boolean`
 
 <br>
 
-### Rename specified file/folder  
+### Переименовать указанный файл/каталог
 
 `File.rename(from,to)`
 
-- Parameters: 
+- Параметры: 
   - from : `String`  
-    Current name of file/folder.
+    Текущее название файла/каталога
 
   - to : `String`  
-    New name of the file/folder.
-- Return value: Whether the rename is successful.
-- Return value type: `Boolean`
+    Новое название файла/каталога
+- Возращаемое значение: Успешна ли операция переименовывания.
+- Тип возращаемого значения: `Boolean`
 
 <br>
 
-### Get the Size of the Specified File
+### Получить размер указанного файла
 
 `File.getFileSize(path)`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
-    The file path to be manipulated.
+    Путь к файлу, с которым нужно работать.
 
-- Return value: the size of the file (bytes).
-- Return value type: `Integer`
+- Возращаемое значение: размер файла (в байтах).
+- Тип возращаемого значения: `Integer`
 
-If the path location passed in is a folder, returns `-1`.
+Если переданный путь является папкой, возвращает `-1`.
 
 <br>
 
-### Determine if the Specified Path Is a Folder
+### Определить, является ли указанный путь каталогом
 
 `File.checkIsDir(path)`
 
-- Parameter: 
+- Параметры: 
   - path : `String`  
-    Determined path.
-- Return value: Whether the target path is a folder.
-- Return value type: `Boolean`
+    Указанный путь.
+- Возращаемое значение: Является ли целевой путь каталогом.
+- Тип возращаемого значения: `Boolean`
 
-If the target path does not exist, it will also return `false`
+Если указанный путь не существует, он также вернет `false`
 
 <br>
 
-### List All Files/Folders Under the Specified Folder
+### Список всех файлов/каталогов в указанном каталоге
 
 `File.getFilesList(dir)`
 
-- Parameter: 
+- Параметры: 
   - dir: `String`  
-    Folder path.
+    Путь до каталога.
 
-- Return value: Array of file names, folder names.
-- Return value type: `Array<String,String,...>`
+- Возращаемое значение: Массив имен файлов/каталогов.
+- Тип возращаемого значения: `Array<String,String,...>`
 
 <br>

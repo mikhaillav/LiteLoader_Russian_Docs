@@ -1,221 +1,222 @@
-## 🌏 Web Interface API
+<!-- translated -->
 
-The following APIs provide the basic network interface for scripts.
-If there are more complex needs, the network library of the respective language platform can be used to complete the task.
+## 🌏 API веб интерфейса
 
-### Send an Asynchronous HTTP(s) Get Request  
+Следущие API предоставляют базовые веб функции для ваших скриптов.
+Если есть более сложные потребности, для выполнения задачи можно использовать сетевую библиотеку соответствующей языковой платформы.
+
+### Отправить асинхронный httpGet запрос 
 
 `network.httpGet(url,callback)`
 
-- Parameters: 
+- Параметры: 
   - url : `String`  
-    The target address of the request (including the parameters attached to the Get request).
+    Целевой адресс (включая параметры для создания Get запроса).
   - callback : `Function`  
-    The callback function to execute when the request returns, to return the HTTP(s) response result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    Функция обратного вызова, выполняется что бы получить результат запроса.
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возвращаемого значения: `Boolean`.
 
-Note: The prototype of the callback function of the parameter callback: `function(status,result)`  
+Примечание. Прототип функции обратного вызова: `function(exitcode,output)`  
 
 - status : `Integer`    
-  The returned HTTP(s) response code, such as 200 means the request was successful.
+  Возвращает код ответа HTTP, 200 значит что запрос выполнен успешно.
 - result : `String`  
-  The returned data.
+  Возвращаемые данные.
 
-If the request fails, the status value will be `-1`. 
+Если запрос не удался, `status` будет равен `-1`. 
 
 <br>
 
-### Send an Asynchronous HTTP(s) Post Request  
+### Отправить асинхронный httpPost запрос 
 
 `network.httpPost(url,data,type,callback)`
 
-- Parameters: 
+- Параметры: 
   - url : `String`  
-    The destination address of the request.
+    Адресс назначения запроса.
   - data : `String`  
-    The data being sent.
+    Данные для отправки.
   - type : `String`  
-    The Post data type sent, in the form of `text/plain` `application/x-www-form-urlencoded`.
+    Данные Post запроса могут быть типа `text/plain` или `application/x-www-form-urlencoded`.
   - callback : `Function`  
-    The callback function to execute when the request returns, to return the HTTP(s) response result.
-- Return value: Whether the request was successfully sent.
-- Return value type: `Boolean`
+    Функция обратного вызова, выполняется что бы получить результат запроса.
+- Возвращаемое значение: Был ли запрос успешно отправлен.
+- Тип возвращаемого значения: `Boolean`.
 
-Note: The prototype of the callback function of the parameter callback: `function(status,result)`  
+Примечание. Прототип функции обратного вызова: `function(exitcode,output)`  
 
 - status : `Integer`    
-  The returned HTTP(s) response code, such as 200 means the request was successful.
+  Возвращает код ответа HTTP, 200 значит что запрос выполнен успешно.
 - result : `String`  
-  The returned data.
+  Возвращаемые данные.
 
-If the request fails, the status value will be `-1`.
+Если запрос не удался, `status` будет равен `-1`. 
 
 <br>
 
-## 🔌 WebSocket Client Object API
+## 🔌 API WebSocket клиента
 
-In LLSE, use "WebSocket objects" to manipulate the connection and work of a WebSocket client.
+В LLSE, используйте "обьект WebSocket" для подключения и работы с клиентом WebSocket.
 
-### Create a New WebSocket Client Object 
+### Создание обьекта WebSocket Client Object 
 
 [JS] `new WSClient()`  
 [Lua] `WSClient()`
 
-- Return value: A new WebSocket client object.
-- Return value type: `WSClient`
+- Возвращаемое значение: Объект нового клиента WebSocket.
+- Тип возвращаемого значения: `WSClient`
 
 <br>
 
-### WebSocket Client Object - Properties
+### Объект клиента WebSocket — свойства
 
-Every WS client object contains some fixed object properties. for a specific file object `wsc`, has the following properties:
+Каждый объект клиента WS содержит некоторые фиксированные свойства. Для определенного объекта `wsc` имеет следующие свойства:
 
-| Attributes | Meaning        | Data Type   |
-| ---------- | -------------- | ------ |
-| wsc.status | Current Connection Status | `Enum` |
+| Атрибут    | Значение           | Тип    |
+| ---------- | ------------------ | ------ |
+| wsc.status | Статус подключения | `Enum` |
 
-These object properties are read-only and cannot be modified.
+Эти свойства доступны только для чтения и не могут быть изменены
 
-Among them, the wsc.status enumeration has the following situations:
+Среди них wsc.status имеет следующие значения:
 
-`wsc.Open` - In normal connection.  
-`wsc.Closing` - Disconnecting.  
-`wsc.Closed` - Not connected.
+`wsc.Open` - Стабльное соединение.  
+`wsc.Closing` - Отключение.  
+`wsc.Closed` - Отключен.
 
 <br>
 
-### WebSocket Client Object - Function
+### Объект клиента WebSocket — функции
 
-Every WS client object contains some member functions (member methods) that can be executed. for a specific file object `wsc`, you can perform some operations on this client through the following functions.
+Каждый клиентский объект WS содержит некоторые функции (методы), которые могут быть выполнены. Для определенного объекта `wsc` вы можете выполнять некоторые операции с помощью следующих функций.
 
-#### Create a Connection
+#### Подключиться
 
 `wsc.connect(target)`
 
-- Parameter: 
+- Параметры: 
   - target : `String`  
-    The destination address to connect to, in the form of `ws://hostname[:port][/path/path][?query=value]`
-- Return value: Whether the connection is successful.
-- Return value type: `Boolean` 
+    Адрес назначения в следущем формате `ws://hostname[:port][/path/path][?query=value]`.
+- Возвращаемое значение: Было ли подключение успешно.
+- Тип возвращаемого значения: `Boolean` 
 
 <br>
 
-#### Create a Connection Asynchronously
+#### Асинхронно подключиться
 
 `wsc.connectAsync(target,callback)`
 
-- Parameters: 
+- Параметры: 
   - target : `String`  
-    The destination address to connect to, in the form of `ws://hostname[:port][/path/path][?query=value]`
+    Адрес назначения в следущем формате `ws://hostname[:port][/path/path][?query=value]`.
   - callback : `Function`
-    A callback function to execute when the connection succeeds or fails.
-- Return value: Whether the connection attempt was started successfully or not.
-- Return value type: `Boolean` 
+    Функция обратного вызова, выполняется в случае выполнения (или не выполнения) подключения.
+- Возвращаемое значение: Была ли попытка подключиться успешна или нет.
+- Тип возвращаемого значения: `Boolean` 
 
-Note: The prototype of the callback function of the parameter callback: `function(success)`  
+Примечание. Прототип функции обратного вызова: `function(success)`  
 
 - success : `Boolean`    
-  Whether the WebSocket connection is successful 
+  Было ли подключение выполнено успешно
 
 <br>
 
-#### Send Text/Binary Messages
+#### Отправка текстовых/бинарных сообщений
 
 `wsc.send(msg)`
 
-- Parameter: 
+- Параметр: 
   - msg : `String` / `ByteBuffer`  
-    Text/Binary data to send.
-- Return value: Whether it was sent successfully.
-- Return value type: `Boolean` 
+    Текст/бинарные данные для отправки
+- Возвращаемое значение: Были ли данные успешно отправлены.
+- Тип возвращаемого значения: `Boolean` 
 
-If the parameter type passed in is `String`, will be sent as text, if it is `ByteBuffer` will be sent as binary data.
+Если параметр предоставлен как `String`, он будет отправлен текстом, если же как `ByteBuffer` будет отпрвлен как бинарные данные.
 
 <br>
 
-#### Listen for WebSocket Events 
+#### Прослушивание ивентов WebSocket 
 
-In the process of WS working, when a message is received or an error occurs, the relevant information needs to be processed. Here is the interface for listening to events.
-
+В процессе работы WS, при получении сообщения, или возникновении ошибки необходима обработка соответствующей информации. Вот интерфейс для прослушивания событий:
 `wsc.listen(event,callback)`
 
-- Parameters: 
+- Параметры: 
 
   - event : `String`  
-    The name of the event to listen for (see the list of listening events below).
+    Название ивента для прослушки, список ивентов ниже.
 
   - callback : `Functon`  
-    Registered listener function (see below for function-related parameters)
-    When the specified event occurs, LLSE will call the listener function you gave and pass in the corresponding parameters.
-- Return value: Whether the event was successfully monitored.
-- Return value type: `Boolean` 
+    Регистрация функции прослушивания
+    Когда произойдет указанное событие, LLSE вызовет указанную вами функцию прослушивателя и передаст соответствующие параметры.
+- Возвращаемое значение: Был ли ивент успешно перехвачен.
+- Тип возвращаемого значения: `Boolean` 
 
 <br>
 
-#### List of Listening Events
+#### Список прослушивемых ивентов
 
-##### `"onTextReceived"` - Listen for string messages.
+##### `"onTextReceived"` - Ожидать доставления строки.
 
-- Listener function prototype
+- Прототип функции прослушки
   `function(msg)`
-- Parameter: 
+- Параметр: 
   - msg : `String`  
-    Received string message.
+    Доставленая строка.
 
-##### `"onBinaryReceived"` - Listen for binary messages.
+##### `"onBinaryReceived"` - Ожидать доставления бинарного сообщения.
 
-- Listener function prototype 
+- Прототип функции прослушки
   `function(data)`
-- Parameter: 
+- Параметр: 
   - data : `ByteBuffer`  
-    Received binary message.
+    Доставленое бинарное сообщение.
 
-##### `"onError"` - Listen for errors.
+##### `"onError"` - Ожидать ошибку.
 
-- Listener function prototype 
+- Прототип функции прослушки
   `function(msg)`
-- Parameter: 
+- Параметр: 
   - msg : `String`  
-    Error message.
+    Сообщение об ошибке.
 
-##### `"onLostConnection"` - Listen for lost connections.
+##### `"onLostConnection"` - Ожидать потери соединения.
 
-- Listener function prototype 
+- Прототип функции прослушки
   `function(code)`
-- Parameter: 
+- Параметр: 
   - code : `Integer`  
-    Error code.
+    Код ошибки.
 
 <br>
 
-#### Close the Connection
+#### Отключиться
 
 `wsc.close()`
 
-- Return value: Whether the connection was successfully closed.
-- Return value type: `Boolean` 
+- Возвращаемое значение: Whether the connection was successfully closed.
+- Тип возвращаемого значения: `Boolean` 
 
-Do not continue to use this client object while it is closed!
+Не продолжайте использовать этот клиентский объект, пока он отключен!
 
 <br>
 
-#### Force Disconnect
+#### Принудительно отключить
 
 `wsc.shutdown()`
 
-- Return value: Whether the connection was successfully disconnected.
-- Return value type: `Boolean` 
+- Возвращаемое значение: Whether the connection was successfully disconnected.
+- Тип возвращаемого значения: `Boolean` 
 
-Do not continue to use this client object while it is disconnected!
+Не продолжайте использовать этот клиентский объект, пока он отключен!
 
 <br>
 
-#### Get Error Code
+#### Получить код ошибки
 
 `wsc.errorCode()`
 
-- Return value: The error code generated by the last error.
-- Return value type: `Integer`
+- Возвращаемое значение: Код последней ошибки.
+- Тип возвращаемого значения: `Integer`
 
-If you encounter a failure in the use of the above interface, you can get the last error code from here.
+Если вы столкнулись с ошибкой при использовании вышеуказанного интерфейса, вы можете получить последний код ошибки отсюда.
